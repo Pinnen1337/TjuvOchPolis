@@ -27,7 +27,7 @@
             {
                 Console.Clear();
                 //RitaStaden();
-                City city = new City(100, 25, 98, 100);
+                City city = new City(100, 25);
                 city.DrawCity();
 
                 foreach (Person person in persons)
