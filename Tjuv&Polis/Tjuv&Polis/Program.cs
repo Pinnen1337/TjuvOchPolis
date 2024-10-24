@@ -4,9 +4,10 @@
     {
         static void Main(string[] args)
         {
+
             Random random = new Random();
             List<Person> persons = new List<Person>();
-            int numberOfEachType = 10;
+            int numberOfEachType = 5;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
 
@@ -39,10 +40,11 @@
                     Console.Write(person.Symbol);
                     Console.ResetColor();
                     person.Move();
-                    //Console.SetCursorPosition(1, 1);
+                    Console.SetCursorPosition(0, verticalCitySize + 1); // För Mac
+
                 }
 
-                Thread.Sleep(500);
+                Thread.Sleep(300);
                 //Console.ReadKey();
                 //Console.ReadLine();
             }

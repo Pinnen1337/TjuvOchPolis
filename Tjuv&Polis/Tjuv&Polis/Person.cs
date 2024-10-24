@@ -8,11 +8,16 @@ namespace Tjuv_Polis
         public int YPosition { get; set; }
         public int MovementX { get; set; }
         public int MovementY { get; set; }
+        public int HorizontalSpace { get; set; }
+        public int VerticalSpace { get; set; }
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
 
         public Person(int horizontalSpace, int verticalSpace)
         {
+            HorizontalSpace = horizontalSpace;
+            VerticalSpace = verticalSpace;
+
             Random random = new Random();
             XPosition = random.Next(2, horizontalSpace - 1);
             YPosition = random.Next(2, verticalSpace - 1);
@@ -24,6 +29,28 @@ namespace Tjuv_Polis
         {
             int newXPosition = XPosition + MovementX;
             int newYPosition = YPosition + MovementY;
+
+
+
+            if (newXPosition < 1)
+            {
+                newXPosition = HorizontalSpace - 2;
+
+            }
+            if (newYPosition < 1)
+            {
+                newYPosition = VerticalSpace - 1;
+            }
+
+            if (newYPosition >= VerticalSpace)
+            {
+                newYPosition = 2;
+            }
+
+            if (newXPosition >= HorizontalSpace - 1)
+            {
+                newXPosition = 2;
+            }
 
             XPosition = newXPosition;
             YPosition = newYPosition;
