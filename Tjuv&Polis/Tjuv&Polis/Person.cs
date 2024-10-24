@@ -6,6 +6,8 @@ namespace Tjuv_Polis
     {
         public int XPosition { get; set; }
         public int YPosition { get; set; }
+        public int MovementX { get; set; }
+        public int MovementY { get; set; }
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
 
@@ -14,7 +16,15 @@ namespace Tjuv_Polis
             Random random = new Random();
             XPosition = random.Next(2, horizontalSpace - 1);
             YPosition = random.Next(2, verticalSpace - 1);
+            MovementX = random.Next(-1, 2);
+            MovementY = random.Next(-1, 2);
         }
+
+        public void Move()
+        {
+            XPosition = XPosition + MovementX;
+            YPosition = YPosition + MovementY;
+        } 
     }
 
     class Civilian : Person

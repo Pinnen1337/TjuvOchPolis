@@ -34,43 +34,18 @@
 
                 foreach (Person person in persons)
                 {
-                    Console.SetCursorPosition(person.XPosition, person.YPosition); //Ska vi byta ut denna funktion?
+                    Console.SetCursorPosition(person.XPosition, person.YPosition);
                     Console.ForegroundColor = person.Color;
                     Console.Write(person.Symbol);
                     Console.ResetColor();
+                    person.Move();
+                    Console.SetCursorPosition(0, 0);
                 }
 
-                //Thread.Sleep(500);
+                Thread.Sleep(500);
                 //Console.ReadKey();
-                Console.ReadLine();
+                //Console.ReadLine();
             }
         }
-        //static void RitaStaden()
-        //{
-        //    for (int tak = 0; tak < 100; tak++)
-        //    {
-        //        Console.Write("=");
-
-        //    }
-        //    Console.WriteLine();
-
-        //    for (int i = 0; i < 25; i++)
-        //    {
-        //        Console.Write("░");  //Vänster vägg
-
-        //        for (int j = 0; j < 98; j++)
-        //        {
-        //            Console.Write(" "); // Mellanrum
-        //        }
-        //        Console.WriteLine("░"); //Höger vägg
-        //    }
-
-
-        //    for (int golv = 0; golv < 100; golv++)
-        //    {
-        //        Console.Write("=");
-        //    }
-        //    Console.WriteLine();
-        //}
     }
 }
