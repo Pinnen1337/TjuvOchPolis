@@ -31,8 +31,6 @@
 
             while(true)
             {
-
-
                 foreach (Person person in persons)
                 {
                     person.Move();

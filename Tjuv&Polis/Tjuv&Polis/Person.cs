@@ -29,6 +29,10 @@ namespace Tjuv_Polis
         {
             Console.SetCursorPosition(XPosition, YPosition);
             Console.Write(" ");
+            // Rensa tidigare position genom att skriva ut ett blanksteg
+            Console.SetCursorPosition(XPosition, YPosition);
+            Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
+
             int newXPosition = XPosition + MovementX;
             int newYPosition = YPosition + MovementY;
 
@@ -52,6 +56,7 @@ namespace Tjuv_Polis
             XPosition = newXPosition;
             YPosition = newYPosition;
 
+            // Rita personen på nya positionen
             Console.SetCursorPosition(XPosition, YPosition);
             Console.ForegroundColor = Color;
             Console.Write(Symbol);

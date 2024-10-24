@@ -49,9 +49,6 @@ namespace Tjuv_Polis
                 cursorPositionTop++;
             }
         }
-
-
-
     }
 
 }
