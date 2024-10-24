@@ -26,7 +26,9 @@
             while(true)
             {
                 Console.Clear();
-                RitaStaden();
+                //RitaStaden();
+                City city = new City(100, 25, 98, 100);
+                city.DrawCity();
 
                 foreach (Person person in persons)
                 {
@@ -41,32 +43,32 @@
                 Console.ReadLine();
             }
         }
-        static void RitaStaden()
-        {
-            for (int tak = 0; tak < 100; tak++)
-            {
-                Console.Write("=");
+        //static void RitaStaden()
+        //{
+        //    for (int tak = 0; tak < 100; tak++)
+        //    {
+        //        Console.Write("=");
 
-            }
-            Console.WriteLine();
+        //    }
+        //    Console.WriteLine();
 
-            for (int i = 0; i < 25; i++)
-            {
-                Console.Write("░");  //Vänster vägg
+        //    for (int i = 0; i < 25; i++)
+        //    {
+        //        Console.Write("░");  //Vänster vägg
 
-                for (int j = 0; j < 98; j++)
-                {
-                    Console.Write(" "); // Mellanrum
-                }
-                Console.WriteLine("░"); //Höger vägg
-            }
+        //        for (int j = 0; j < 98; j++)
+        //        {
+        //            Console.Write(" "); // Mellanrum
+        //        }
+        //        Console.WriteLine("░"); //Höger vägg
+        //    }
 
 
-            for (int golv = 0; golv < 100; golv++)
-            {
-                Console.Write("=");
-            }
-            Console.WriteLine();
-        }
+        //    for (int golv = 0; golv < 100; golv++)
+        //    {
+        //        Console.Write("=");
+        //    }
+        //    Console.WriteLine();
+        //}
     }
 }
