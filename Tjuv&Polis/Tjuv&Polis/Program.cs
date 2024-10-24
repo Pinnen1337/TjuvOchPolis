@@ -7,27 +7,29 @@
             Random random = new Random();
             List<Person> persons = new List<Person>();
             int numberOfEachType = 10;
+            int horizontalCitySize = 100;
+            int verticalCitySize = 25;
 
             for (int civilians = 0; civilians < numberOfEachType; civilians++)
             {
-                persons.Add(new Civilian());
+                persons.Add(new Civilian(horizontalCitySize, verticalCitySize));
             }
 
             for (int thiefs = 0; thiefs < numberOfEachType; thiefs++)
             {
-                persons.Add(new Thief());
+                persons.Add(new Thief(horizontalCitySize, verticalCitySize));
             }
 
             for (int police = 0; police < numberOfEachType; police++)
             {
-                persons.Add(new Police());
+                persons.Add(new Police(horizontalCitySize, verticalCitySize));
             }
 
             while(true)
             {
                 Console.Clear();
-                //RitaStaden();
-                City city = new City(100, 25);
+
+                City city = new City(horizontalCitySize, verticalCitySize);
                 city.DrawCity();
 
                 foreach (Person person in persons)

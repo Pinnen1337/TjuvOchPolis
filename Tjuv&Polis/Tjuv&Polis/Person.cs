@@ -9,17 +9,17 @@ namespace Tjuv_Polis
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
 
-        public Person()
+        public Person(int horizontalSpace, int verticalSpace)
         {
             Random random = new Random();
-            XPosition = random.Next(2, 99);
-            YPosition = random.Next(2, 24);
+            XPosition = random.Next(2, horizontalSpace - 1);
+            YPosition = random.Next(2, verticalSpace - 1);
         }
     }
 
     class Civilian : Person
     {
-        public Civilian() : base()
+        public Civilian(int horizontalSpace, int verticalSpace) : base(horizontalSpace, verticalSpace)
         {
             Symbol = 'C';
             Color = ConsoleColor.Green;
@@ -28,7 +28,7 @@ namespace Tjuv_Polis
 
     class Thief : Person
     {
-        public Thief() : base()
+        public Thief(int horizontalSpace, int verticalSpace) : base(horizontalSpace, verticalSpace)
         {
             Symbol = 'T';
             Color = ConsoleColor.Red;
@@ -37,7 +37,7 @@ namespace Tjuv_Polis
 
     class Police : Person
     {
-        public Police() : base()
+        public Police(int horizontalSpace, int verticalSpace) : base(horizontalSpace, verticalSpace)
         {
             Symbol = 'P';
             Color = ConsoleColor.Blue;
