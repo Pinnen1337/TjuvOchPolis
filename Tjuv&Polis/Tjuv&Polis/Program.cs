@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-
+            Console.CursorVisible = false;
             Random random = new Random();
             List<Person> persons = new List<Person>();
             int numberOfEachType = 5;
@@ -26,22 +26,17 @@
                 persons.Add(new Police(horizontalCitySize, verticalCitySize));
             }
 
+            City city = new City(horizontalCitySize, verticalCitySize);
+            city.DrawCity();
+
             while(true)
             {
-                Console.Clear();
 
-                City city = new City(horizontalCitySize, verticalCitySize);
-                city.DrawCity();
 
                 foreach (Person person in persons)
                 {
-                    Console.SetCursorPosition(person.XPosition, person.YPosition);
-                    Console.ForegroundColor = person.Color;
-                    Console.Write(person.Symbol);
-                    Console.ResetColor();
                     person.Move();
                     Console.SetCursorPosition(0, verticalCitySize + 1); // För Mac
-
                 }
 
                 Thread.Sleep(300);
