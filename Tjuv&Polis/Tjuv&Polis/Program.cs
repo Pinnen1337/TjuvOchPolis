@@ -39,7 +39,7 @@
                     Console.Write(person.Symbol);
                     Console.ResetColor();
                     person.Move();
-                    Console.SetCursorPosition(0, 0);
+                    //Console.SetCursorPosition(1, 1);
                 }
 
                 Thread.Sleep(500);

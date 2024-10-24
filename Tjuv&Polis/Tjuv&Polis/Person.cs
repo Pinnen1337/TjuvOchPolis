@@ -22,8 +22,12 @@ namespace Tjuv_Polis
 
         public void Move()
         {
-            XPosition = XPosition + MovementX;
-            YPosition = YPosition + MovementY;
+            int newXPosition = XPosition + MovementX;
+            int newYPosition = YPosition + MovementY;
+
+            XPosition = newXPosition;
+            YPosition = newYPosition;
+
         } 
     }
 
