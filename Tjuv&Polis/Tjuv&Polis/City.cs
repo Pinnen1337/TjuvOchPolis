@@ -29,7 +29,7 @@ namespace Tjuv_Polis
         }
         private void DrawLowerWall()
         {
-            Console.SetCursorPosition(0, 25);
+            Console.SetCursorPosition(0, VerticalWallLength + 1);
             for (int i = 0; i < HorisontalWallLength; i++)
             {
                 Console.Write("="); //Golv
@@ -44,7 +44,7 @@ namespace Tjuv_Polis
             {
                 Console.SetCursorPosition(cursorPositionLeft, cursorPositionTop); 
                 Console.Write("░");  //Vänster vägg
-                Console.SetCursorPosition(cursorPositionLeft + HorisontalWallLength, cursorPositionTop);
+                Console.SetCursorPosition(cursorPositionLeft + HorisontalWallLength -1, cursorPositionTop);
                 Console.WriteLine("░"); //Höger vägg
                 cursorPositionTop++;
             }
