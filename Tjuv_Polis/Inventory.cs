@@ -9,6 +9,11 @@ namespace Tjuv_Polis
         {
             Items = new List<Item>();
         }
+        public override string ToString()
+        {
+            if (Items.Count == 0) return "Empty inventory";
+            else return base.ToString();
+        }
     }
 }
 
