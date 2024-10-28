@@ -15,7 +15,7 @@ namespace Tjuv_Polis
         public ConsoleColor Color { get; set; }
         public Inventory Inventory { get; set; }
 
-        public Person(int horizontalSpace, int verticalSpace, int iD)
+        public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory)
         {
             HorizontalSpace = horizontalSpace;
             VerticalSpace = verticalSpace;
@@ -27,6 +27,7 @@ namespace Tjuv_Polis
             MovementY = random.Next(-1, 2);
 
             ID = iD;
+            Inventory = inventory;
         }
 
         public void Move()
@@ -74,7 +75,7 @@ namespace Tjuv_Polis
 
     class Civilian : Person
     {
-        public Civilian(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD)
+        public Civilian(int horizontalSpace, int verticalSpace, int iD, Inventory inventory) : base(horizontalSpace, verticalSpace, iD, inventory)
         {
             Symbol = 'C';
             Color = ConsoleColor.Green;
@@ -83,7 +84,7 @@ namespace Tjuv_Polis
 
     class Thief : Person
     {
-        public Thief(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD)
+        public Thief(int horizontalSpace, int verticalSpace, int iD, Inventory inventory) : base(horizontalSpace, verticalSpace, iD, inventory)
         {
             Symbol = 'T';
             Color = ConsoleColor.Red;
@@ -92,7 +93,7 @@ namespace Tjuv_Polis
 
     class Police : Person
     {
-        public Police(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD)
+        public Police(int horizontalSpace, int verticalSpace, int iD, Inventory inventory) : base(horizontalSpace, verticalSpace, iD, inventory)
         {
             Symbol = 'P';
             Color = ConsoleColor.Blue;
