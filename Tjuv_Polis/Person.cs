@@ -65,7 +65,11 @@ namespace Tjuv_Polis
             Console.ForegroundColor = Color;
             Console.Write(Symbol);
             Console.ResetColor();
-        } 
+        }
+        public virtual string Status()
+        {
+            return $"{GetType().Name} {ID}: {Inventory}: ({XPosition}, {YPosition})";
+        }
     }
 
     class Civilian : Person
@@ -75,13 +79,7 @@ namespace Tjuv_Polis
             Symbol = 'C';
             Color = ConsoleColor.Green;
         }
-
-        public override string ToString()
-        {
-            string result = $"{GetType().Name} {ID}: {Inventory}: ({XPosition}, {YPosition})";
-                return result;
-        }
-    }
+            }
 
     class Thief : Person
     {

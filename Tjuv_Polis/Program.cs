@@ -29,28 +29,21 @@
             City city = new City(horizontalCitySize, verticalCitySize);
             city.DrawCity();
 
+
             while (true)
             {
-                Console.Clear();
-            foreach (Person person in persons)
-            {
-                Console.WriteLine(person);
-              
-            }
+                foreach (Person person in persons)
+                {
+                    person.Move();
+                    Console.SetCursorPosition(0, verticalCitySize + 2); // För Mac
+                }
+                foreach (Person person in persons)
+                {
+                    Console.WriteLine(person.Status());
+                }
 
+                Thread.Sleep(150);
             }
-            //while(true)
-            //{
-            //    foreach (Person person in persons)
-            //    {
-            //        //person.Move();
-            //        //Console.SetCursorPosition(0, verticalCitySize + 1); // För Mac
-            //    }
-
-            //Thread.Sleep(300);
-                //Console.ReadKey();
-                //Console.ReadLine();
-            //}
         }
     }
 }
