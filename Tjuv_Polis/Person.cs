@@ -79,6 +79,12 @@ namespace Tjuv_Polis
         {
             Symbol = 'C';
             Color = ConsoleColor.Green;
+            List<Item> kindOfItem = new List<Item>();
+            kindOfItem.Add(new Wallet());
+            kindOfItem.Add(new Watch());
+            kindOfItem.Add(new Phone());
+            kindOfItem.Add(new Keys());
+
         }
             }
 

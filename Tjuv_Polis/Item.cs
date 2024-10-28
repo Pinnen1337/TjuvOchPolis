@@ -13,15 +13,14 @@ namespace Tjuv_Polis
 
 	class Wallet : Item
 	{
-		public Wallet(string kindOfItem) : base(kindOfItem)
+		public Wallet() : base("Wallet")
 		{
-			kindOfItem = "Wallet";
 		}
 	}
 
 	class Watch : Item
 	{
-		public Watch(string kindOfItem) : base(kindOfItem)
+		public Watch() : base("Watch")
 		{
 
 		}
@@ -37,7 +36,7 @@ namespace Tjuv_Polis
 
 	class Keys : Item
 	{
-		public Keys(string kindOfItem) : base(kindOfItem)
+		public Keys() : base("Keys")
 		{
 
 		}
