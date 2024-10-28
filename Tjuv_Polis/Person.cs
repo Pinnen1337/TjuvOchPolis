@@ -4,6 +4,7 @@ namespace Tjuv_Polis
 {
     internal class Person
     {
+        public int ID { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
         public int MovementX { get; set; }
@@ -12,8 +13,9 @@ namespace Tjuv_Polis
         public int VerticalSpace { get; set; }
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
+        public Inventory Inventory { get; set; }
 
-        public Person(int horizontalSpace, int verticalSpace)
+        public Person(int horizontalSpace, int verticalSpace, int iD)
         {
             HorizontalSpace = horizontalSpace;
             VerticalSpace = verticalSpace;
@@ -23,6 +25,8 @@ namespace Tjuv_Polis
             YPosition = random.Next(2, verticalSpace - 1);
             MovementX = random.Next(-1, 2);
             MovementY = random.Next(-1, 2);
+
+            ID = iD;
         }
 
         public void Move()
@@ -66,16 +70,22 @@ namespace Tjuv_Polis
 
     class Civilian : Person
     {
-        public Civilian(int horizontalSpace, int verticalSpace) : base(horizontalSpace, verticalSpace)
+        public Civilian(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD)
         {
             Symbol = 'C';
             Color = ConsoleColor.Green;
+        }
+
+        public override string ToString()
+        {
+            string result = $"{GetType().Name} {ID}: {Inventory}: ({XPosition}, {YPosition})";
+                return result;
         }
     }
 
     class Thief : Person
     {
-        public Thief(int horizontalSpace, int verticalSpace) : base(horizontalSpace, verticalSpace)
+        public Thief(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD)
         {
             Symbol = 'T';
             Color = ConsoleColor.Red;
@@ -84,7 +94,7 @@ namespace Tjuv_Polis
 
     class Police : Person
     {
-        public Police(int horizontalSpace, int verticalSpace) : base(horizontalSpace, verticalSpace)
+        public Police(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD)
         {
             Symbol = 'P';
             Color = ConsoleColor.Blue;

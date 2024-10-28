@@ -13,34 +13,44 @@
 
             for (int civilians = 0; civilians < numberOfEachType; civilians++)
             {
-                persons.Add(new Civilian(horizontalCitySize, verticalCitySize));
+                persons.Add(new Civilian(horizontalCitySize, verticalCitySize, civilians + 1));
             }
 
             for (int thiefs = 0; thiefs < numberOfEachType; thiefs++)
             {
-                persons.Add(new Thief(horizontalCitySize, verticalCitySize));
+                persons.Add(new Thief(horizontalCitySize, verticalCitySize, thiefs + 1));
             }
 
             for (int police = 0; police < numberOfEachType; police++)
             {
-                persons.Add(new Police(horizontalCitySize, verticalCitySize));
+                persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1));
             }
 
             City city = new City(horizontalCitySize, verticalCitySize);
             city.DrawCity();
 
-            while(true)
+            while (true)
             {
-                foreach (Person person in persons)
-                {
-                    person.Move();
-                    Console.SetCursorPosition(0, verticalCitySize + 1); // För Mac
-                }
+                Console.Clear();
+            foreach (Person person in persons)
+            {
+                Console.WriteLine(person);
+              
+            }
 
-                Thread.Sleep(300);
+            }
+            //while(true)
+            //{
+            //    foreach (Person person in persons)
+            //    {
+            //        //person.Move();
+            //        //Console.SetCursorPosition(0, verticalCitySize + 1); // För Mac
+            //    }
+
+            //Thread.Sleep(300);
                 //Console.ReadKey();
                 //Console.ReadLine();
-            }
+            //}
         }
     }
 }
