@@ -13,17 +13,17 @@
 
             for (int civilians = 0; civilians < numberOfEachType; civilians++)
             {
-                persons.Add(new Civilian(horizontalCitySize, verticalCitySize, civilians + 1, new Inventory()));
+                persons.Add(new Civilian(horizontalCitySize, verticalCitySize, civilians + 1));
             }
 
             for (int thiefs = 0; thiefs < numberOfEachType; thiefs++)
             {
-                persons.Add(new Thief(horizontalCitySize, verticalCitySize, thiefs + 1, new Inventory()));
+                persons.Add(new Thief(horizontalCitySize, verticalCitySize, thiefs + 1));
             }
 
             for (int police = 0; police < numberOfEachType; police++)
             {
-                persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1, new Inventory()));
+                persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1));
             }
 
             City city = new City(horizontalCitySize, verticalCitySize);

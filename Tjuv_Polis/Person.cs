@@ -69,28 +69,28 @@ namespace Tjuv_Polis
         }
         public virtual string Status()
         {
-            return $"{GetType().Name} {ID}: {Inventory}: ({XPosition}, {YPosition})";
+            // Kontrollera om inventariet har några föremål
+            string inventoryStatus = Inventory.Items.Count > 0
+                ? string.Join(", ", Inventory.Items.Select(item => item.KindOfItem))
+                : "Empty inventory";
+
+            return $"{GetType().Name} {ID}: [{inventoryStatus}] ({XPosition}, {YPosition})";
         }
     }
 
     class Civilian : Person
     {
-        public Civilian(int horizontalSpace, int verticalSpace, int iD, Inventory inventory) : base(horizontalSpace, verticalSpace, iD, inventory)
+        public Civilian(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
         {
             Symbol = 'C';
             Color = ConsoleColor.Green;
-            List<Item> kindOfItem = new List<Item>();
-            kindOfItem.Add(new Wallet());
-            kindOfItem.Add(new Watch());
-            kindOfItem.Add(new Phone());
-            kindOfItem.Add(new Keys());
 
         }
             }
 
     class Thief : Person
     {
-        public Thief(int horizontalSpace, int verticalSpace, int iD, Inventory inventory) : base(horizontalSpace, verticalSpace, iD, inventory)
+        public Thief(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
         {
             Symbol = 'T';
             Color = ConsoleColor.Red;
@@ -99,7 +99,7 @@ namespace Tjuv_Polis
 
     class Police : Person
     {
-        public Police(int horizontalSpace, int verticalSpace, int iD, Inventory inventory) : base(horizontalSpace, verticalSpace, iD, inventory)
+        public Police(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
         {
             Symbol = 'P';
             Color = ConsoleColor.Blue;
