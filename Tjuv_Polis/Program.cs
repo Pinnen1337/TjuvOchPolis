@@ -1,4 +1,6 @@
-﻿namespace Tjuv_Polis
+﻿using Tjuv_Polis;
+
+namespace Tjuv_Polis
 {
     internal class Program
     {
@@ -10,6 +12,7 @@
             int numberOfEachType = 5;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
+
 
             for (int civilians = 0; civilians < numberOfEachType; civilians++)
             {
@@ -35,6 +38,7 @@
                 foreach (Person person in persons)
                 {
                     person.Move();
+
                     Console.SetCursorPosition(0, verticalCitySize + 2); // För Mac
                 }
                 foreach (Person person in persons)
@@ -42,8 +46,20 @@
                     Console.WriteLine(person.Status());
                 }
 
-                Thread.Sleep(150);
+                bool somethingHappens = Helper.CheckCollision(persons);
+                
+                if (somethingHappens)
+                {
+                    Console.WriteLine("Something happened");
+                    Console.ReadKey();
+                }
+
+                Thread.Sleep(500);
             }
         }
     }
 }
+
+//person.Collision(Civilan);
+//person.Collision(Thief);
+//person.Collision(Police);

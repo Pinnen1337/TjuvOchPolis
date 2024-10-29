@@ -7,13 +7,7 @@ namespace Tjuv_Polis
 
         public Inventory()
         {
-            Items = new List<Item>
-        {
-            new Wallet(),
-            new Watch(),
-            new Phone(),
-            new Keys()
-        };
+            Items = new List<Item>();
         }
 
         public override string ToString()
