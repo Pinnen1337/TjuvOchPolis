@@ -50,11 +50,10 @@ namespace Tjuv_Polis
                 
                 if (somethingHappens)
                 {
-                    Console.WriteLine("Something happened");
-                    Console.ReadKey();
+                    //Console.WriteLine("Something happened");
                 }
 
-                Thread.Sleep(500);
+                Thread.Sleep(100);
             }
         }
     }

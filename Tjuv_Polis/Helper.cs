@@ -4,30 +4,39 @@ internal class Helper
 {
     public static bool CheckCollision(List<Person> persons)
     {
-        List<Person> personsAtSameLocation = new List<Person>();
-        List<List<Person>> collidingPersons = new List<List<Person>>();
+        List<List<Person>> collidingPersonsGrouped = new List<List<Person>>(); // List of lists of all Persons involved in collisions grouped by collision location
+        List<Person> collidingPersons = new List<Person>(); // List to keep track of persons already involved in a collision
+
         foreach (Person thisPerson in persons)
         {
+            if (collidingPersons.Contains(thisPerson)) // skip the collision check if this Person is involved in an "other" collision
+            { 
+                continue;
+            }
+
+            List<Person> personsAtSameLocation = new List<Person>();
+            personsAtSameLocation.Add(thisPerson);
+
             foreach (Person otherPerson in persons)
             {
                 if (thisPerson != otherPerson)
                 {
-                    if (thisPerson.XPosition == otherPerson.XPosition && thisPerson.YPosition == otherPerson.YPosition)
+                    if (thisPerson.XPosition == otherPerson.XPosition
+                        && thisPerson.YPosition == otherPerson.YPosition
+                        && !personsAtSameLocation.Contains(otherPerson))
                     {
-                        if (personsAtSameLocation.Count == 0)
-                        {
-                            personsAtSameLocation.Add(thisPerson);
-                            personsAtSameLocation.Add(otherPerson);
-                        }
-                        else
-                        {
-                            personsAtSameLocation.Add(otherPerson);
-                        }
+                        personsAtSameLocation.Add(otherPerson);
+                        collidingPersons.Add(thisPerson); // Add the Person as involved in a collision
                     }
                 }
             }
-            collidingPersons.Add(personsAtSameLocation);
+
+            if (personsAtSameLocation.Count > 1)
+            {
+                collidingPersonsGrouped.Add(personsAtSameLocation);
+            }
         }
-        return (collidingPersons.Count != 0 );
+        return (collidingPersonsGrouped.Count != 0);
     }
 }
+
