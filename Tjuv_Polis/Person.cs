@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Tjuv_Polis;
 
@@ -67,30 +68,7 @@ internal class Person
         Console.Write(Symbol);
         Console.ResetColor();
     }
-    //public void Collision(Person other)
-    //{
-    //    if (XPosition == other.XPosition && YPosition == other.YPosition)
-    //    {
-            
-    //        if (this is Civilian civilian && other is Thief thief)
-    //        {
-    //            Console.WriteLine($"Thief {thief.ID} stole from Civilian {civilian.ID}!");
-                
-    //        }
-    //        else if (this is Thief thief && other is Police police)
-    //        {
-    //            Console.WriteLine($"Police {police.ID} caught Thief {thief.ID}!");
-                
-    //        }
-    //        else if (this is Police police && other is Civilian civilian)
-    //        {
-    //            Console.WriteLine($"Police {police.ID} interacted with Civilian {civilian.ID}.");
-                
-    //        }
-    //    }
-    //    Console.ReadKey();
-
-    //}
+    
     public virtual string Status()
     {
         // Kontrollera om inventariet har några föremål
@@ -114,25 +92,72 @@ class Civilian : Person
         PersonalInventory.Items.Add(new Phone());
         PersonalInventory.Items.Add(new Keys());
     }
-
-
 }
 
 class Thief : Person
 {
-public Thief(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
-{
+    public List<Item> StolenItems { get; set; } = new List<Item>();
+    public Thief(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
+    {
+        Symbol = 'T';
+        Color = ConsoleColor.Red;
+    }
+    public void Steal(Civilian civilian)
+    {
+        if (civilian.PersonalInventory.Items.Count > 0)
+        {
+            Item itemToSteal = civilian.PersonalInventory.Items[0];
+            StolenItems.Add(itemToSteal);
+            civilian.PersonalInventory.Items.RemoveAt(0);
 
-    Symbol = 'T';
-    Color = ConsoleColor.Red;
-}
+            Console.WriteLine($"Thief {ID} stole {itemToSteal} from Civilian {civilian.ID}.");
+        }
+    }
 }
 
 class Police : Person
 {
-public Police(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
-{
-    Symbol = 'P';
-    Color = ConsoleColor.Blue;
+    List<Item> ConfiscatedItems { get; set; } = new List<Item>();
+    public Police(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
+    {
+        Symbol = 'P';
+        Color = ConsoleColor.Blue;
+    }
+    public void Confiscate(Thief thief)
+    {
+        if (thief.StolenItems.Count > 0)
+        {
+            Item itemToConfiscate = thief.StolenItems[0];
+            ConfiscatedItems.Add(itemToConfiscate);
+            thief.StolenItems.RemoveAt(0);
+
+            Console.WriteLine($"Police {ID} confiscated {itemToConfiscate} from Thief {thief.ID}.");
+        }
+    }
 }
-}
+
+
+//public void Collision(Person other)
+//{
+//    if (XPosition == other.XPosition && YPosition == other.YPosition)
+//    {
+
+//        if (this is Civilian civilian && other is Thief thief)
+//        {
+//            Console.WriteLine($"Thief {thief.ID} stole from Civilian {civilian.ID}!");
+
+//        }
+//        else if (this is Thief thief && other is Police police)
+//        {
+//            Console.WriteLine($"Police {police.ID} caught Thief {thief.ID}!");
+
+//        }
+//        else if (this is Police police && other is Civilian civilian)
+//        {
+//            Console.WriteLine($"Police {police.ID} interacted with Civilian {civilian.ID}.");
+
+//        }
+//    }
+//    Console.ReadKey();
+
+//}
