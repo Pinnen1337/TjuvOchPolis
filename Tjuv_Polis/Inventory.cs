@@ -14,21 +14,21 @@ namespace Tjuv_Polis
             Items.Add(item);
         }
         public bool RemoveItem(Item item)
-        { 
-            return Items.Remove(item); 
-        }
-        public string Status()
         {
-            return Items.Count > 0
-                ? string.Join(", ", Items.Select(i => i.KindOfItem))
-                : "Empty inventory";
+            return Items.Remove(item);
         }
-
-        //public override string ToString()
+        //public string Status()
         //{
-        //    if (Items.Count == 0) return "Empty inventory";
-        //    return string.Join(", ", Items.Select(item => item.KindOfItem));
+        //    return Items.Count > 0
+        //        ? string.Join(", ", Items.Select(i => i.KindOfItem))
+        //        : "Empty inventory";
         //}
+
+        public override string ToString()
+        {
+            if (Items.Count == 0) return "Empty inventory";
+            return string.Join(", ", Items.Select(item => item.KindOfItem));
+        }
     }
 }
 

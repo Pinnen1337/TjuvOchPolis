@@ -10,9 +10,12 @@ namespace Tjuv_Polis
             Console.CursorVisible = false;
             Random random = new Random();
             List<Person> persons = new List<Person>();
-            int numberOfEachType = 10;
+            int numberOfEachType = 5;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
+
+            int statusRow = verticalCitySize + 2;
+            int messageRow = statusRow + numberOfEachType * 3;
 
 
             for (int civilians = 0; civilians < numberOfEachType; civilians++)
@@ -33,23 +36,31 @@ namespace Tjuv_Polis
             City city = new City(horizontalCitySize, verticalCitySize);
             city.DrawCity();
 
+            Console.SetCursorPosition(0, messageRow);
+            Console.Write(new string('-', horizontalCitySize));
 
             while (true)
             {
                 foreach (Person person in persons)
                 {
                     person.Move();
-
-                    Console.SetCursorPosition(0, verticalCitySize + 2); // För Mac
                 }
-                foreach (Person person in persons)
+
+                for (int i = 0; i < persons.Count; i++)
                 {
-                    Console.WriteLine(person.Status());
+                    Console.SetCursorPosition(0, statusRow + i);
+                    Console.Write(new string(' ', Console.WindowWidth)); // Rensa raden
+                    Console.SetCursorPosition(0, statusRow + i);
+                    Console.WriteLine(persons[i].Status());
                 }
 
+
+                Console.SetCursorPosition(0, messageRow + 1);
+                Console.Write(new string(' ', horizontalCitySize));
+                Console.SetCursorPosition(0, messageRow + 1);
                 Helper.CheckCollision(persons);
 
-                Thread.Sleep(50);
+                Thread.Sleep(15);
             }
         }
     }

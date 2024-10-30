@@ -73,10 +73,10 @@ internal class Person
     {
         // Kontrollera om inventariet har några föremål
         string inventoryStatus = PersonalInventory.Items.Count > 0
-            ? string.Join(", ", PersonalInventory.Items.Select(item => item.KindOfItem))
+            ? string.Join(" ", PersonalInventory.Items.Select(item => "[" + item.KindOfItem + "]"))
             : "";
 
-        return $"{GetType().Name} {ID}: \t ({XPosition}, {YPosition}) \t [{inventoryStatus}]";
+        return $"{GetType().Name} {ID}: \t ({XPosition}, {YPosition}) \t {inventoryStatus}";
     }
 }
 
@@ -112,15 +112,16 @@ class Thief : Person
             civilian.PersonalInventory.RemoveItem(itemToSteal);
             
 
-            Console.WriteLine($"Thief {ID} stole {itemToSteal} from Civilian {civilian.ID}.");
+            Console.WriteLine($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.");
+            Console.ReadKey();
         }
     }
     public override string Status()
     {
             string stolenItemsStatus = StolenItems.Count > 0
-                ? string.Join(", ", StolenItems.Select(item => item.KindOfItem))
-                : "No stolen items";
-            return $"{base.Status()} - Stolen items: [{stolenItemsStatus}]\t\t";
+                ? string.Join(" ", StolenItems.Select(item => "[" + item.KindOfItem + "]"))
+                : "";
+            return $"{base.Status()}{stolenItemsStatus}";
     }
 }
 
@@ -138,13 +139,23 @@ class Police : Person
         {
             string stolenItemsAsString = "";
 
-            for(int item = 0; item < thief.StolenItems.Count; item ++)
-            {
-                ConfiscatedItems.Add(thief.StolenItems[item]);
-                thief.StolenItems.Remove(thief.StolenItems[item]);
-                stolenItemsAsString += thief.StolenItems[item].KindOfItem + ", ";
+            //for (int item = 0; item < thief.StolenItems.Count; item++)
+            //{
+            //    ConfiscatedItems.Add(thief.StolenItems[item]);
+            //    thief.StolenItems.Remove(thief.StolenItems[item]);
+            //    stolenItemsAsString += thief.StolenItems[item].KindOfItem + ", ";
+            //}
+
+            foreach (Item item in thief.StolenItems.ToList())
+                {
+                ConfiscatedItems.Add(item);
+                stolenItemsAsString += item.KindOfItem + ", ";
             }
-            stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');     // Fixa
+
+            // Töm listan efteråt
+            thief.StolenItems.Clear();
+
+            stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');
 
 
             Console.WriteLine($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
@@ -154,9 +165,9 @@ class Police : Person
     public override string Status()
     {
         string confiscatedItemsStatus = ConfiscatedItems.Count > 0
-            ? string.Join(", ", ConfiscatedItems.Select(item => item.KindOfItem))
-            : "No confiscated items";
-        return $"{base.Status()} - Confiscated items: [{confiscatedItemsStatus}]\t\t";
+            ? string.Join(" ", ConfiscatedItems.Select(item => "[" + item.KindOfItem + "]"))
+            : "";
+        return $"{base.Status()}{confiscatedItemsStatus}";
     }
 }
 
