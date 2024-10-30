@@ -136,12 +136,15 @@ class Police : Person
     {
         if (thief.StolenItems.Count > 0)
         {
-            int randomIndex = Random.Shared.Next(thief.PersonalInventory.Items.Count);
-            Item itemToConfiscate = thief.StolenItems[randomIndex];
-            ConfiscatedItems.Add(itemToConfiscate);
-            thief.StolenItems.Remove(itemToConfiscate);
+            string stolenItemsAsString = "";
+            for (int i = 0; i < thief.StolenItems.Count; i++)
+            {
+                ConfiscatedItems.Add(thief.StolenItems[i]);
+                thief.StolenItems.RemoveAt(i);
+                stolenItemsAsString += ConfiscatedItems[i].KindOfItem + ", ";
+            }
 
-            Console.WriteLine($"Police {ID} confiscated {itemToConfiscate} from Thief {thief.ID}.");
+            Console.WriteLine($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
         }
     }
     public override string Status()
