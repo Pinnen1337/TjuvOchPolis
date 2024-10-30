@@ -14,20 +14,40 @@ internal class Helper
                 {
                     if (thisPerson.XPosition == otherPerson.XPosition && thisPerson.YPosition == otherPerson.YPosition)
                     {
-                        if (personsAtSameLocation.Count == 0)
+                        if (thisPerson is Civilian civilian && otherPerson is Thief thief)
                         {
-                            personsAtSameLocation.Add(thisPerson);
-                            personsAtSameLocation.Add(otherPerson);
+                            thief.Steal(civilian);
+
                         }
-                        else
+                        else if (thisPerson is Thief thief2 && otherPerson is Police police)
                         {
-                            personsAtSameLocation.Add(otherPerson);
+                            police.Confiscate(thief2);
+
                         }
+                        else if (thisPerson is Police police2 && otherPerson is Civilian civilian2)
+                        {
+                            Console.WriteLine($"Police {police2.ID} interacted with Civilian {civilian2.ID}.");
+
+                        }
+                        //                if (personsAtSameLocation.Count == 0)
+                        //                {
+                        //                    personsAtSameLocation.Add(thisPerson);
+                        //                    personsAtSameLocation.Add(otherPerson);
+                        //                }
+                        //                else
+                        //                {
+                        //                    personsAtSameLocation.Add(otherPerson);
+                        //                }
+                        //            }
+                        //        }
+                        //    }
+                        //    collidingPersons.Add(personsAtSameLocation);
+                        //}
+                        //return (collidingPersons.Count != 0 );
                     }
                 }
             }
-            collidingPersons.Add(personsAtSameLocation);
         }
-        return (collidingPersons.Count != 0 );
+        return false;
     }
 }
