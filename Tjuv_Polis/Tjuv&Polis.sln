@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1706.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tjuv&Polis", "Tjuv&Polis.csproj", "{16DBC686-30DB-4E98-8C8E-E3A4BA928FBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionDemo", "..\..\..\CodeAlong\CollectionDemo\CollectionDemo.csproj", "{EC7C9CE3-49FA-44EC-9D04-164CB76A04A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{16DBC686-30DB-4E98-8C8E-E3A4BA928FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16DBC686-30DB-4E98-8C8E-E3A4BA928FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16DBC686-30DB-4E98-8C8E-E3A4BA928FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC7C9CE3-49FA-44EC-9D04-164CB76A04A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC7C9CE3-49FA-44EC-9D04-164CB76A04A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC7C9CE3-49FA-44EC-9D04-164CB76A04A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC7C9CE3-49FA-44EC-9D04-164CB76A04A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
