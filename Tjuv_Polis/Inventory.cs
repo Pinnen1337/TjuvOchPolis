@@ -9,12 +9,26 @@ namespace Tjuv_Polis
         {
             Items = new List<Item>();
         }
-
-        public override string ToString()
+        public void AddItem(Item item)
         {
-            if (Items.Count == 0) return "Empty inventory";
-            return string.Join(", ", Items.Select(item => item.KindOfItem));
+            Items.Add(item);
         }
+        public bool RemoveItem(Item item)
+        { 
+            return Items.Remove(item); 
+        }
+        public string Status()
+        {
+            return Items.Count > 0
+                ? string.Join(", ", Items.Select(i => i.KindOfItem))
+                : "Empty inventory";
+        }
+
+        //public override string ToString()
+        //{
+        //    if (Items.Count == 0) return "Empty inventory";
+        //    return string.Join(", ", Items.Select(item => item.KindOfItem));
+        //}
     }
 }
 

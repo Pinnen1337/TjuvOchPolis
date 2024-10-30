@@ -9,7 +9,7 @@ namespace Tjuv_Polis
             Console.CursorVisible = false;
             Random random = new Random();
             List<Person> persons = new List<Person>();
-            int numberOfEachType = 5;
+            int numberOfEachType = 10;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
 
@@ -46,15 +46,9 @@ namespace Tjuv_Polis
                     Console.WriteLine(person.Status());
                 }
 
-                bool somethingHappens = Helper.CheckCollision(persons);
                 
-                if (somethingHappens)
-                {
-                    Console.WriteLine("Something happened");
-                    Console.ReadKey();
-                }
 
-                Thread.Sleep(500);
+                Thread.Sleep(50);
             }
         }
     }

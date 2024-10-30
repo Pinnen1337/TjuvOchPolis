@@ -74,9 +74,9 @@ internal class Person
         // Kontrollera om inventariet har några föremål
         string inventoryStatus = PersonalInventory.Items.Count > 0
             ? string.Join(", ", PersonalInventory.Items.Select(item => item.KindOfItem))
-            : "Empty inventory";
+            : "";
 
-        return $"{GetType().Name} {ID}: [{inventoryStatus}] ({XPosition}, {YPosition})";
+        return $"{GetType().Name} {ID}: \t ({XPosition}, {YPosition}) \t [{inventoryStatus}]";
     }
 }
 
@@ -106,12 +106,21 @@ class Thief : Person
     {
         if (civilian.PersonalInventory.Items.Count > 0)
         {
-            Item itemToSteal = civilian.PersonalInventory.Items[0];
+            int randomIndex = Random.Shared.Next(civilian.PersonalInventory.Items.Count);
+            Item itemToSteal = civilian.PersonalInventory.Items[randomIndex];
             StolenItems.Add(itemToSteal);
-            civilian.PersonalInventory.Items.RemoveAt(0);
+            civilian.PersonalInventory.RemoveItem(itemToSteal);
+            
 
             Console.WriteLine($"Thief {ID} stole {itemToSteal} from Civilian {civilian.ID}.");
         }
+    }
+    public override string Status()
+    {
+            string stolenItemsStatus = StolenItems.Count > 0
+                ? string.Join(", ", StolenItems.Select(item => item.KindOfItem))
+                : "No stolen items";
+            return $"{base.Status()} - Stolen items: [{stolenItemsStatus}]\t\t";
     }
 }
 
@@ -127,12 +136,20 @@ class Police : Person
     {
         if (thief.StolenItems.Count > 0)
         {
-            Item itemToConfiscate = thief.StolenItems[0];
+            int randomIndex = Random.Shared.Next(thief.PersonalInventory.Items.Count);
+            Item itemToConfiscate = thief.StolenItems[randomIndex];
             ConfiscatedItems.Add(itemToConfiscate);
-            thief.StolenItems.RemoveAt(0);
+            thief.StolenItems.Remove(itemToConfiscate);
 
             Console.WriteLine($"Police {ID} confiscated {itemToConfiscate} from Thief {thief.ID}.");
         }
+    }
+    public override string Status()
+    {
+        string confiscatedItemsStatus = ConfiscatedItems.Count > 0
+            ? string.Join(", ", ConfiscatedItems.Select(item => item.KindOfItem))
+            : "No confiscated items";
+        return $"{base.Status()} - Confiscated items: [{confiscatedItemsStatus}]\t\t";
     }
 }
 

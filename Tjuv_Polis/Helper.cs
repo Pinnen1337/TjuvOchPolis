@@ -14,19 +14,19 @@ internal class Helper
                 {
                     if (thisPerson.XPosition == otherPerson.XPosition && thisPerson.YPosition == otherPerson.YPosition)
                     {
-                        if (thisPerson is Civilian civilian && otherPerson is Thief thief)
+                        if (thisPerson is Civilian currentcivilian && otherPerson is Thief thief)
                         {
-                            thief.Steal(civilian);
+                            thief.Steal(currentcivilian);
 
                         }
-                        else if (thisPerson is Thief thief2 && otherPerson is Police police)
+                        else if (thisPerson is Thief currentthief && otherPerson is Police police)
                         {
-                            police.Confiscate(thief2);
+                            police.Confiscate(currentthief);
 
                         }
-                        else if (thisPerson is Police police2 && otherPerson is Civilian civilian2)
+                        else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
                         {
-                            Console.WriteLine($"Police {police2.ID} interacted with Civilian {civilian2.ID}.");
+                            Console.WriteLine($"Police {currentpolice.ID} interacted with Civilian {civilian.ID}.");
 
                         }
                         //                if (personsAtSameLocation.Count == 0)
