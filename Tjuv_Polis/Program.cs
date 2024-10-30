@@ -1,4 +1,5 @@
-﻿using Tjuv_Polis;
+﻿using System.Runtime.CompilerServices;
+using Tjuv_Polis;
 
 namespace Tjuv_Polis
 {
@@ -45,8 +46,8 @@ namespace Tjuv_Polis
                 {
                     Console.WriteLine(person.Status());
                 }
+
                 Helper.CheckCollision(persons);
-                
 
                 Thread.Sleep(50);
             }

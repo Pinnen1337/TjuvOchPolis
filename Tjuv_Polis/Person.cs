@@ -137,14 +137,18 @@ class Police : Person
         if (thief.StolenItems.Count > 0)
         {
             string stolenItemsAsString = "";
-            for (int i = 0; i < thief.StolenItems.Count; i++)
+
+            for(int item = 0; item < thief.StolenItems.Count; item ++)
             {
-                ConfiscatedItems.Add(thief.StolenItems[i]);
-                thief.StolenItems.RemoveAt(i);
-                stolenItemsAsString += ConfiscatedItems[i].KindOfItem + ", ";
+                ConfiscatedItems.Add(thief.StolenItems[item]);
+                thief.StolenItems.Remove(thief.StolenItems[item]);
+                stolenItemsAsString += thief.StolenItems[item].KindOfItem + ", ";
             }
+            stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');     // Fixa
+
 
             Console.WriteLine($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
+            Console.ReadKey();
         }
     }
     public override string Status()
