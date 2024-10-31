@@ -10,7 +10,7 @@ namespace Tjuv_Polis
             Console.CursorVisible = false;
             Random random = new Random();
             List<Person> persons = new List<Person>();
-            int numberOfEachType = 5;
+            int numberOfEachType = 15;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
 
@@ -49,7 +49,7 @@ namespace Tjuv_Polis
                 for (int i = 0; i < persons.Count; i++)
                 {
                     Console.SetCursorPosition(0, statusRow + i);
-                    Console.Write(new string(' ', Console.WindowWidth)); // Rensa raden
+                    Console.Write(new string(' ', horizontalCitySize)); // Rensa raden
                     Console.SetCursorPosition(0, statusRow + i);
                     Console.WriteLine(persons[i].Status());
                 }
@@ -57,10 +57,14 @@ namespace Tjuv_Polis
 
                 Console.SetCursorPosition(0, messageRow + 1);
                 Console.Write(new string(' ', horizontalCitySize));
+                Console.SetCursorPosition(0, messageRow + 2);
+                Console.Write(new string(' ', horizontalCitySize));
+                Console.SetCursorPosition(0, messageRow + 3);
+                Console.Write(new string(' ', horizontalCitySize));
                 Console.SetCursorPosition(0, messageRow + 1);
                 Helper.CheckCollision(persons);
 
-                Thread.Sleep(15);
+                Thread.Sleep(0);
             }
         }
     }
