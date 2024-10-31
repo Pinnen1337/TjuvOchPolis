@@ -17,12 +17,6 @@ namespace Tjuv_Polis
         {
             return Items.Remove(item);
         }
-        //public string Status()
-        //{
-        //    return Items.Count > 0
-        //        ? string.Join(", ", Items.Select(i => i.KindOfItem))
-        //        : "Empty inventory";
-        //}
 
         public override string ToString()
         {

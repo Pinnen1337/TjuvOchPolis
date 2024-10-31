@@ -19,7 +19,6 @@ namespace Tjuv_Polis
             int statusRow = verticalCitySize + 2;
             int messageRow = statusRow + numberOfEachType * 3;
 
-
             for (int civilians = 0; civilians < numberOfEachType; civilians++)
             {
                 persons.Add(new Civilian(horizontalCitySize, verticalCitySize, civilians + 1));
@@ -59,7 +58,6 @@ namespace Tjuv_Polis
                     Console.WriteLine(persons[i].Status());
                 }
 
-
                 Console.SetCursorPosition(0, messageRow + 1);
                 Console.Write(new string(' ', horizontalCitySize));
                 Console.SetCursorPosition(0, messageRow + 2);
@@ -74,7 +72,3 @@ namespace Tjuv_Polis
         }
     }
 }
-
-//person.Collision(Civilan);
-//person.Collision(Thief);
-//person.Collision(Police);

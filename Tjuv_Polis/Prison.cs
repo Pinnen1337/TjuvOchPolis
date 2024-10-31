@@ -57,6 +57,4 @@ namespace Tjuv_Polis
             }
         }
     }
-
 }
-

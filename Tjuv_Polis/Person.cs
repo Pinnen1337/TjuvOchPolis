@@ -139,16 +139,6 @@ class Police : Person
         {
             string stolenItemsAsString = "";
 
-            //for (int item = 0; item < thief.StolenItems.Count; item++)
-            //{
-            //    ConfiscatedItems.Add(thief.StolenItems[item]);
-            //    thief.StolenItems.Remove(thief.StolenItems[item]);
-
-
-
-            //    stolenItemsAsString += thief.StolenItems[item].KindOfItem + ", ";
-            //}
-
             foreach (Item item in thief.StolenItems.ToList())
             {
                 ConfiscatedItems.Add(item);
@@ -160,11 +150,11 @@ class Police : Person
 
             stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');
 
-
             Console.WriteLine($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
             Console.ReadKey();
         }
     }
+
     public override string Status()
     {
         string confiscatedItemsStatus = ConfiscatedItems.Count > 0
@@ -173,29 +163,3 @@ class Police : Person
         return $"{base.Status()}{confiscatedItemsStatus}";
     }
 }
-
-
-//public void Collision(Person other)
-//{
-//    if (XPosition == other.XPosition && YPosition == other.YPosition)
-//    {
-
-//        if (this is Civilian civilian && other is Thief thief)
-//        {
-//            Console.WriteLine($"Thief {thief.ID} stole from Civilian {civilian.ID}!");
-
-//        }
-//        else if (this is Thief thief && other is Police police)
-//        {
-//            Console.WriteLine($"Police {police.ID} caught Thief {thief.ID}!");
-
-//        }
-//        else if (this is Police police && other is Civilian civilian)
-//        {
-//            Console.WriteLine($"Police {police.ID} interacted with Civilian {civilian.ID}.");
-
-//        }
-//    }
-//    Console.ReadKey();
-
-//}

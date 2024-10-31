@@ -43,4 +43,3 @@ namespace Tjuv_Polis
 	}
 
 }
-
