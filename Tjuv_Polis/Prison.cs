@@ -17,35 +17,35 @@ namespace Tjuv_Polis
             VerticalWallLength = verticalSize;
         }
 
-        public void DrawPrison()
+        public void DrawPrison(City city)
         {
-            DrawTopWall();
-            DrawLowerWall();
-            DrawWalls();
+            DrawTopWall(city);
+            DrawLowerWall(city);
+            DrawWalls(city);
         }
 
-        private void DrawTopWall()
+        private void DrawTopWall(City city)
         {
-            Console.SetCursorPosition(100 + 1, 0);
+            Console.SetCursorPosition(city.HorisontalWallLength + 1, 0);
             Console.WriteLine("Prison");
-            Console.SetCursorPosition(100 + 1, 1);
+            Console.SetCursorPosition(city.HorisontalWallLength + 1, 1);
             for (int i = 0; i < HorisontalWallLength; i++)
             {
                 Console.Write("=");
             }
         }
-        private void DrawLowerWall()
+        private void DrawLowerWall(City city)
         {
-            Console.SetCursorPosition(100 + 1, VerticalWallLength + 2);
+            Console.SetCursorPosition(city.HorisontalWallLength + 1, VerticalWallLength + 2);
             for (int i = 0; i < HorisontalWallLength; i++)
             {
                 Console.Write("="); //Golv
             }
         }
 
-        private void DrawWalls()
+        private void DrawWalls(City city)
         {
-            int cursorPositionLeft = 101;
+            int cursorPositionLeft = city.HorisontalWallLength + 1;
             int cursorPositionTop = 2;
             for (int wall = 0; wall < VerticalWallLength; wall++)
             {

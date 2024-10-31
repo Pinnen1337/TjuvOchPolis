@@ -39,7 +39,7 @@ namespace Tjuv_Polis
             city.DrawCity();
 
             Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize);
-            prison.DrawPrison();
+            prison.DrawPrison(city);
 
             Console.SetCursorPosition(0, messageRow);
             Console.Write(new string('-', horizontalCitySize));
