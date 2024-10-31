@@ -57,7 +57,7 @@ namespace Tjuv_Polis
                     Console.SetCursorPosition(0, statusRow + i);
                     Console.WriteLine(persons[i].Status());
                 }
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     Console.SetCursorPosition(0, messageRow + i + 1);
                     Console.Write(new string(' ', horizontalCitySize));
