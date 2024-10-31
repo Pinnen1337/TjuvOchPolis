@@ -143,11 +143,14 @@ class Police : Person
             //{
             //    ConfiscatedItems.Add(thief.StolenItems[item]);
             //    thief.StolenItems.Remove(thief.StolenItems[item]);
+
+
+
             //    stolenItemsAsString += thief.StolenItems[item].KindOfItem + ", ";
             //}
 
             foreach (Item item in thief.StolenItems.ToList())
-                {
+            {
                 ConfiscatedItems.Add(item);
                 stolenItemsAsString += item.KindOfItem + ", ";
             }
