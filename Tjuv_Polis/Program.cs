@@ -10,9 +10,11 @@ namespace Tjuv_Polis
             Console.CursorVisible = false;
             Random random = new Random();
             List<Person> persons = new List<Person>();
-            int numberOfEachType = 15;
+            int numberOfEachType = 10;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
+            int horizontalPrisonSize = 10;
+            int verticalPrisonSize = 10;
 
             int statusRow = verticalCitySize + 2;
             int messageRow = statusRow + numberOfEachType * 3;
@@ -35,6 +37,9 @@ namespace Tjuv_Polis
 
             City city = new City(horizontalCitySize, verticalCitySize);
             city.DrawCity();
+
+            Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize);
+            prison.DrawPrison();
 
             Console.SetCursorPosition(0, messageRow);
             Console.Write(new string('-', horizontalCitySize));
