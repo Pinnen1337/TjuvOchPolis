@@ -1,6 +1,6 @@
 ﻿namespace Tjuv_Polis;
 
-internal class Helper
+public class Helper
 {
     public static bool CheckCollision(List<Person> persons)
     {

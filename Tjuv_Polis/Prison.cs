@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tjuv_Polis
 {
-    internal class Prison
+    public class Prison
     {
         public int HorisontalWallLength { get; set; }
         public int VerticalWallLength { get; set; }

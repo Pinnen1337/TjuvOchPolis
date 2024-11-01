@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Tjuv_Polis;
 
-internal class Person
+public class Person
 {
     public int ID { get; set; }
     public int XPosition { get; set; }
