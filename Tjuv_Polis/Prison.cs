@@ -10,77 +10,85 @@ namespace Tjuv_Polis
     {
         public int HorisontalWallLength { get; set; }
         public int VerticalWallLength { get; set; }
-
-        public Prison(int horisontalSize, int verticalSize)
+        public List<Person> PersonsInPrison { get; set; }
+        public int StartDrawPrisonAt { get; set; }
+         
+        public Prison(int horisontalSize, int verticalSize, List<Person> personsInPrison, City city)
         {
             HorisontalWallLength = horisontalSize;
             VerticalWallLength = verticalSize;
+            PersonsInPrison = personsInPrison;
+            StartDrawPrisonAt = city.HorisontalWallLength;
         }
 
-        //public void Move()
-        //{
-        //    Console.SetCursorPosition(XPosition, YPosition);
-        //    Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
-
-        //    int newXPosition = XPosition + MovementX;
-        //    int newYPosition = YPosition + MovementY;
-
-        //    if (newXPosition < 1)
-        //    {
-        //        newXPosition = HorizontalSpace - 2;
-        //    }
-        //    if (newYPosition < 1)
-        //    {
-        //        newYPosition = VerticalSpace - 1;
-        //    }
-        //    if (newYPosition >= VerticalSpace)
-        //    {
-        //        newYPosition = 2;
-        //    }
-        //    if (newXPosition >= HorizontalSpace - 1)
-        //    {
-        //        newXPosition = 2;
-        //    }
-
-        //    XPosition = newXPosition;
-        //    YPosition = newYPosition;
-
-        //    // Rita personen på nya positionen
-        //    Console.SetCursorPosition(XPosition, YPosition);
-        //    Console.ForegroundColor = Color;
-        //    Console.Write(Symbol);
-        //    Console.ResetColor();
-        //}
-
-        public void DrawPrison(City city)
+        public void Move()
         {
-            DrawTopWall(city);
-            DrawLowerWall(city);
-            DrawWalls(city);
+            foreach (Person person in PersonsInPrison)
+            {
+                Console.SetCursorPosition(person.XPosition, person.YPosition);
+                Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
+
+                int newXPosition = person.XPosition + person.MovementX;
+                int newYPosition = person.YPosition + person.MovementY;
+
+                if (newXPosition < StartDrawPrisonAt + 2)
+                {
+                    newXPosition = StartDrawPrisonAt + person.HorizontalSpace - 2;
+                }
+                if (newYPosition < 2)
+                {
+                    newYPosition = person.VerticalSpace - 1;
+                }
+                if (newYPosition >= person.VerticalSpace)
+                {
+                    newYPosition = 2;
+                }
+                if (newXPosition >= StartDrawPrisonAt + person.HorizontalSpace - 1)
+                {
+                    newXPosition = StartDrawPrisonAt + 2;
+                }
+
+                person.XPosition = newXPosition;
+                person.YPosition = newYPosition;
+
+                // Rita personen på nya positionen
+                Console.SetCursorPosition(person.XPosition, person.YPosition);
+                Console.ForegroundColor = person.Color;
+                Console.Write(person.Symbol);
+                Console.ResetColor();
+
+            }
         }
 
-        private void DrawTopWall(City city)
+        public void DrawPrison()
         {
-            Console.SetCursorPosition(city.HorisontalWallLength + 1, 0);
+            DrawTopWall();
+            DrawLowerWall();
+            DrawWalls();
+        }
+
+        private void DrawTopWall()
+        {
+            Console.SetCursorPosition(StartDrawPrisonAt + 1, 0);
             Console.WriteLine("Prison");
-            Console.SetCursorPosition(city.HorisontalWallLength + 1, 1);
+            Console.SetCursorPosition(StartDrawPrisonAt + 1, 1);
             for (int i = 0; i < HorisontalWallLength; i++)
             {
                 Console.Write("=");
             }
         }
-        private void DrawLowerWall(City city)
+        private void DrawLowerWall()
         {
-            Console.SetCursorPosition(city.HorisontalWallLength + 1, VerticalWallLength + 2);
+            Console.SetCursorPosition(StartDrawPrisonAt + 1, VerticalWallLength + 2);
             for (int i = 0; i < HorisontalWallLength; i++)
             {
                 Console.Write("="); //Golv
             }
         }
 
-        private void DrawWalls(City city)
+        private void DrawWalls()
         {
-            int cursorPositionLeft = city.HorisontalWallLength + 1;
+            int cursorPositionLeft = StartDrawPrisonAt + 1;
             int cursorPositionTop = 2;
             for (int wall = 0; wall < VerticalWallLength; wall++)
             {

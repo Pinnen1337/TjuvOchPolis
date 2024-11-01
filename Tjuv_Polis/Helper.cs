@@ -29,21 +29,6 @@ public class Helper
                             Console.WriteLine($"Police {currentpolice.ID} interacted with Civilian {civilian.ID}.");
 
                         }
-                        //                if (personsAtSameLocation.Count == 0)
-                        //                {
-                        //                    personsAtSameLocation.Add(thisPerson);
-                        //                    personsAtSameLocation.Add(otherPerson);
-                        //                }
-                        //                else
-                        //                {
-                        //                    personsAtSameLocation.Add(otherPerson);
-                        //                }
-                        //            }
-                        //        }
-                        //    }
-                        //    collidingPersons.Add(personsAtSameLocation);
-                        //}
-                        //return (collidingPersons.Count != 0 );
                     }
                 }
             }

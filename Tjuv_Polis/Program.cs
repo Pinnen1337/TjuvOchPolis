@@ -10,7 +10,8 @@ namespace Tjuv_Polis
             Console.CursorVisible = false;
             Random random = new Random();
             List<Person> persons = new List<Person>();
-            int numberOfEachType = 10;
+
+            int numberOfEachType = 0;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
             int horizontalPrisonSize = 25;
@@ -34,11 +35,21 @@ namespace Tjuv_Polis
                 persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1));
             }
 
+
+            List<Person> lifePrisoners = new List<Person>();
+            Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666);
+            lifer.XPosition = horizontalCitySize + 3;
+            lifer.YPosition = 5;
+
+
+            lifePrisoners.Add(lifer);
+
+
             City city = new City(horizontalCitySize, verticalCitySize, persons);
             city.DrawCity();
 
-            Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize);
-            prison.DrawPrison(city);
+            Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, lifePrisoners, city);
+            prison.DrawPrison();
 
             PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
             poorhouse.DrawPoorHouse(city, prison);
@@ -49,7 +60,7 @@ namespace Tjuv_Polis
             while (true)
             {
                 city.Move();
-                //prison.Move();
+                prison.Move();
 
                 for (int i = 0; i < persons.Count; i++)
                 {
@@ -63,17 +74,11 @@ namespace Tjuv_Polis
                     Console.SetCursorPosition(0, messageRow + i + 1);
                     Console.Write(new string(' ', horizontalCitySize));
                 }
-                //Console.SetCursorPosition(0, messageRow + 1);
-                //Console.Write(new string(' ', horizontalCitySize));
-                //Console.SetCursorPosition(0, messageRow + 2);
-                //Console.Write(new string(' ', horizontalCitySize));
-                //Console.SetCursorPosition(0, messageRow + 3);
-                //Console.Write(new string(' ', horizontalCitySize));
 
                 Console.SetCursorPosition(0, messageRow + 1);
                 Helper.CheckCollision(persons);
 
-                Thread.Sleep(0);
+                Thread.Sleep(100);
             }
         }
     }

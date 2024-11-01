@@ -16,40 +16,23 @@ public class Person
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
     public bool IsInPrison {  get; set; }
-    public int horizontalSize { get; set; }
-    public int verticalSize { get; set; }
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory)
     {
         HorizontalSpace = horizontalSpace;
         VerticalSpace = verticalSpace;
-        //RandomStill(horizontalSpace, verticalSpace); // Kalla på metod som är standard för alla
+
         Random random = new Random();
         XPosition = random.Next(2, horizontalSpace - 1);
         YPosition = random.Next(2, verticalSpace - 1);
         MovementX = random.Next(-1, 2);
         MovementY = random.Next(-1, 2);
 
-
         ID = iD;
         PersonalInventory = inventory;
 
-        //IsInPrison = false;
     }
 
-    //public virtual void RandomStill(int horizontalSpace, int verticalSpace) // Gjorde om till en metod istället så vi kan overrida metoden till tjuv längre ner.
-    //{
-
-        //Random random = new Random();
-        //XPosition = random.Next(2, horizontalSpace - 1);
-        //YPosition = random.Next(2, verticalSpace - 1);
-        //MovementX = random.Next(-1, 2);
-        //MovementY = random.Next(-1, 2);
-
-    //}
-
-
-    
     public virtual string Status()
     {
         // Kontrollera om inventariet har några föremål
@@ -84,27 +67,7 @@ class Thief : Person
         Symbol = 'T';
         Color = ConsoleColor.Red;
 
-        //if (IsInPrison)
-        //{
-        //    //RandomStill(horizontalSpace, verticalSpace); // Kallar på metod genom en if när tjuv är i prison.
-        //    Random random = new Random();
-        //    XPosition = random.Next(103, 110 - 1);
-        //    YPosition = random.Next(3, 10 - 2);
-        //    MovementX = random.Next(-1, 2);
-        //    MovementY = random.Next(-1, 2);
-        //    return;
-        //}
     }
-    //public override void RandomStill(int horizontalSpace, int verticalSpace) // Override metod för random move i prison
-    //{
-    //        Random random = new Random();
-    //        XPosition = random.Next(103, 110 - 1);
-    //        YPosition = random.Next(3, 10 - 2);
-    //        MovementX = random.Next(-1, 2);
-    //        MovementY = random.Next(-1, 2);
-    //}
-
-
 
     public void Steal(Civilian civilian)
     {
@@ -115,10 +78,9 @@ class Thief : Person
             Item itemToSteal = civilian.PersonalInventory.Items[randomIndex];
             StolenItems.Add(itemToSteal);
             civilian.PersonalInventory.RemoveItem(itemToSteal);
-            
 
             Console.WriteLine($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.");
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 
@@ -165,7 +127,7 @@ class Police : Person
 
             Console.WriteLine($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
             thief.Imprison();
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 
