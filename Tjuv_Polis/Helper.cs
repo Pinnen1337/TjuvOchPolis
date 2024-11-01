@@ -21,7 +21,7 @@ internal class Helper
                         }
                         else if (thisPerson is Thief currentthief && otherPerson is Police police)
                         {
-                            police.Confiscate(currentthief);
+                            police.ConfiscateAndArrest(currentthief);
 
                         }
                         else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)

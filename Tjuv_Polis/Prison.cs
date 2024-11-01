@@ -17,6 +17,41 @@ namespace Tjuv_Polis
             VerticalWallLength = verticalSize;
         }
 
+        //public void Move()
+        //{
+        //    Console.SetCursorPosition(XPosition, YPosition);
+        //    Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
+
+        //    int newXPosition = XPosition + MovementX;
+        //    int newYPosition = YPosition + MovementY;
+
+        //    if (newXPosition < 1)
+        //    {
+        //        newXPosition = HorizontalSpace - 2;
+        //    }
+        //    if (newYPosition < 1)
+        //    {
+        //        newYPosition = VerticalSpace - 1;
+        //    }
+        //    if (newYPosition >= VerticalSpace)
+        //    {
+        //        newYPosition = 2;
+        //    }
+        //    if (newXPosition >= HorizontalSpace - 1)
+        //    {
+        //        newXPosition = 2;
+        //    }
+
+        //    XPosition = newXPosition;
+        //    YPosition = newYPosition;
+
+        //    // Rita personen på nya positionen
+        //    Console.SetCursorPosition(XPosition, YPosition);
+        //    Console.ForegroundColor = Color;
+        //    Console.Write(Symbol);
+        //    Console.ResetColor();
+        //}
+
         public void DrawPrison(City city)
         {
             DrawTopWall(city);

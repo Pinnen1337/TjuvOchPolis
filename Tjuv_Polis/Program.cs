@@ -3,7 +3,7 @@ using Tjuv_Polis;
 
 namespace Tjuv_Polis
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -13,7 +13,7 @@ namespace Tjuv_Polis
             int numberOfEachType = 10;
             int horizontalCitySize = 100;
             int verticalCitySize = 25;
-            int horizontalPrisonSize = 10;
+            int horizontalPrisonSize = 25;
             int verticalPrisonSize = 10;
 
             int statusRow = verticalCitySize + 2;
@@ -34,21 +34,22 @@ namespace Tjuv_Polis
                 persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1));
             }
 
-            City city = new City(horizontalCitySize, verticalCitySize);
+            City city = new City(horizontalCitySize, verticalCitySize, persons);
             city.DrawCity();
 
             Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize);
             prison.DrawPrison(city);
+
+            PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
+            poorhouse.DrawPoorHouse(city, prison);
 
             Console.SetCursorPosition(0, messageRow);
             Console.Write(new string('-', horizontalCitySize));
 
             while (true)
             {
-                foreach (Person person in persons)
-                {
-                    person.Move();
-                }
+                city.Move();
+                //prison.Move();
 
                 for (int i = 0; i < persons.Count; i++)
                 {
@@ -68,6 +69,7 @@ namespace Tjuv_Polis
                 //Console.Write(new string(' ', horizontalCitySize));
                 //Console.SetCursorPosition(0, messageRow + 3);
                 //Console.Write(new string(' ', horizontalCitySize));
+
                 Console.SetCursorPosition(0, messageRow + 1);
                 Helper.CheckCollision(persons);
 

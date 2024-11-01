@@ -15,59 +15,40 @@ internal class Person
     public char Symbol { get; set; }
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
+    public bool IsInPrison {  get; set; }
+    public int horizontalSize { get; set; }
+    public int verticalSize { get; set; }
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory)
     {
         HorizontalSpace = horizontalSpace;
         VerticalSpace = verticalSpace;
-
+        //RandomStill(horizontalSpace, verticalSpace); // Kalla på metod som är standard för alla
         Random random = new Random();
         XPosition = random.Next(2, horizontalSpace - 1);
         YPosition = random.Next(2, verticalSpace - 1);
         MovementX = random.Next(-1, 2);
         MovementY = random.Next(-1, 2);
 
+
         ID = iD;
         PersonalInventory = inventory;
+
+        //IsInPrison = false;
     }
 
-    public void Move()
-    {
-        Console.SetCursorPosition(XPosition, YPosition);
-        Console.Write(" ");
-        // Rensa tidigare position genom att skriva ut ett blanksteg
-        Console.SetCursorPosition(XPosition, YPosition);
-        Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
+    //public virtual void RandomStill(int horizontalSpace, int verticalSpace) // Gjorde om till en metod istället så vi kan overrida metoden till tjuv längre ner.
+    //{
 
-        int newXPosition = XPosition + MovementX;
-        int newYPosition = YPosition + MovementY;
+        //Random random = new Random();
+        //XPosition = random.Next(2, horizontalSpace - 1);
+        //YPosition = random.Next(2, verticalSpace - 1);
+        //MovementX = random.Next(-1, 2);
+        //MovementY = random.Next(-1, 2);
 
-        if (newXPosition < 1)
-        {
-            newXPosition = HorizontalSpace - 2;
-        }
-        if (newYPosition < 1)
-        {
-            newYPosition = VerticalSpace - 1;
-        }
-        if (newYPosition >= VerticalSpace)
-        {
-            newYPosition = 2;
-        }
-        if (newXPosition >= HorizontalSpace - 1)
-        {
-            newXPosition = 2;
-        }
+    //}
 
-        XPosition = newXPosition;
-        YPosition = newYPosition;
 
-        // Rita personen på nya positionen
-        Console.SetCursorPosition(XPosition, YPosition);
-        Console.ForegroundColor = Color;
-        Console.Write(Symbol);
-        Console.ResetColor();
-    }
     
     public virtual string Status()
     {
@@ -99,13 +80,37 @@ class Thief : Person
     public List<Item> StolenItems { get; set; } = new List<Item>();
     public Thief(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
     {
+
         Symbol = 'T';
         Color = ConsoleColor.Red;
+
+        //if (IsInPrison)
+        //{
+        //    //RandomStill(horizontalSpace, verticalSpace); // Kallar på metod genom en if när tjuv är i prison.
+        //    Random random = new Random();
+        //    XPosition = random.Next(103, 110 - 1);
+        //    YPosition = random.Next(3, 10 - 2);
+        //    MovementX = random.Next(-1, 2);
+        //    MovementY = random.Next(-1, 2);
+        //    return;
+        //}
     }
+    //public override void RandomStill(int horizontalSpace, int verticalSpace) // Override metod för random move i prison
+    //{
+    //        Random random = new Random();
+    //        XPosition = random.Next(103, 110 - 1);
+    //        YPosition = random.Next(3, 10 - 2);
+    //        MovementX = random.Next(-1, 2);
+    //        MovementY = random.Next(-1, 2);
+    //}
+
+
+
     public void Steal(Civilian civilian)
     {
-        if (civilian.PersonalInventory.Items.Count > 0)
+        if (!IsInPrison && civilian.PersonalInventory.Items.Count > 0)
         {
+            
             int randomIndex = Random.Shared.Next(civilian.PersonalInventory.Items.Count);
             Item itemToSteal = civilian.PersonalInventory.Items[randomIndex];
             StolenItems.Add(itemToSteal);
@@ -116,12 +121,20 @@ class Thief : Person
             Console.ReadKey();
         }
     }
+
+    public void Imprison()
+    {
+        IsInPrison = true;
+        
+        Console.WriteLine($"Thief {ID} has been sent to prison!");
+    }
+
     public override string Status()
     {
             string stolenItemsStatus = StolenItems.Count > 0
                 ? string.Join(" ", StolenItems.Select(item => "[" + item.KindOfItem + "]"))
                 : "";
-            return $"{base.Status()}{stolenItemsStatus}";
+            return $"{base.Status()} {(IsInPrison ? "[In Prison]" : "")}{stolenItemsStatus}";
     }
 }
 
@@ -133,9 +146,9 @@ class Police : Person
         Symbol = 'P';
         Color = ConsoleColor.Blue;
     }
-    public void Confiscate(Thief thief)
+    public void ConfiscateAndArrest(Thief thief)
     {
-        if (thief.StolenItems.Count > 0)
+        if (!thief.IsInPrison && thief.StolenItems.Count > 0)
         {
             string stolenItemsAsString = "";
 
@@ -151,6 +164,7 @@ class Police : Person
             stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');
 
             Console.WriteLine($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
+            thief.Imprison();
             Console.ReadKey();
         }
     }
@@ -163,3 +177,4 @@ class Police : Person
         return $"{base.Status()}{confiscatedItemsStatus}";
     }
 }
+
