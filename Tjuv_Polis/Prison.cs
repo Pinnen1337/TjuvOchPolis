@@ -37,9 +37,9 @@ namespace Tjuv_Polis
                 }
                 if (newYPosition < 2)
                 {
-                    newYPosition = person.VerticalSpace - 1;
+                    newYPosition = person.VerticalSpace + 1;
                 }
-                if (newYPosition >= person.VerticalSpace)
+                if (newYPosition >= person.VerticalSpace + 2)
                 {
                     newYPosition = 2;
                 }
