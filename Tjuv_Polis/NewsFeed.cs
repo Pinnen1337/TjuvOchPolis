@@ -31,12 +31,12 @@ public class NewsFeed
     private void Write()
     {
         int rowOffset = 0;
-        foreach (var message in NewsQueue)
+        foreach (var news in NewsQueue.Reverse())
         {
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset);
             Console.Write(new string(' ', 100));
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset);
-            Console.Write(message);
+            Console.Write(news);
             rowOffset++;
         }
     }
