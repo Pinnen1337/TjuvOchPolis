@@ -8,7 +8,7 @@ public class Program
         Random random = new Random();
         List<Person> persons = new List<Person>();
 
-        int numberOfEachType = 0;
+        int numberOfEachType = 5;
         int horizontalCitySize = 100;
         int verticalCitySize = 25;
         int horizontalPrisonSize = 25;
@@ -61,20 +61,20 @@ public class Program
             city.Move();
             prison.Move();
 
-            for (int i = 0; i < persons.Count; i++)
-            {
-                Console.SetCursorPosition(0, statusRow + i);
-                Console.Write(new string(' ', horizontalCitySize)); // Rensa raden
-                Console.SetCursorPosition(0, statusRow + i);
-                Console.WriteLine(persons[i].Status());
-            }
-            for (int i = 0; i < 4; i++) // rensar nu 4 rader då det har hänt en gång
-            {
-                Console.SetCursorPosition(0, messageRow + i + 1);
-                Console.Write(new string(' ', horizontalCitySize));
-            }
+            //for (int i = 0; i < persons.Count; i++)
+            //{
+            //    Console.SetCursorPosition(0, statusRow + i);
+            //    Console.Write(new string(' ', horizontalCitySize)); // Rensa raden
+            //    Console.SetCursorPosition(0, statusRow + i);
+            //    Console.WriteLine(persons[i].Status());
+            //}
+            //for (int i = 0; i < 4; i++) // rensar nu 4 rader då det har hänt en gång
+            //{
+            //    Console.SetCursorPosition(0, messageRow + i + 1);
+            //    Console.Write(new string(' ', horizontalCitySize));
+            //}
 
-            Console.SetCursorPosition(0, messageRow + 1);
+            //Console.SetCursorPosition(0, messageRow + 1);
             Helper.CheckCollision(persons);
 
             Thread.Sleep(100);
