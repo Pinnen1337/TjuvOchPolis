@@ -2,6 +2,11 @@
 
 public class Helper
 {
+    private NewsFeed _newsFeed;
+    public Helper(NewsFeed newsFeed)
+    {
+        _newsFeed = newsFeed;
+    }
     public static bool CheckCollision(List<Person> persons)
     {
         List<Person> personsAtSameLocation = new List<Person>();

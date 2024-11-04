@@ -17,24 +17,26 @@ public class Program
         int statusRow = verticalCitySize + 2;
         int messageRow = statusRow + numberOfEachType * 3;
 
+        NewsFeed newsFeed = new NewsFeed();
+
         for (int civilians = 0; civilians < numberOfEachType; civilians++)
         {
-            persons.Add(new Civilian(horizontalCitySize, verticalCitySize, civilians + 1));
+            persons.Add(new Civilian(horizontalCitySize, verticalCitySize, civilians + 1, newsFeed));
         }
 
         for (int thiefs = 0; thiefs < numberOfEachType; thiefs++)
         {
-            persons.Add(new Thief(horizontalCitySize, verticalCitySize, thiefs + 1));
+            persons.Add(new Thief(horizontalCitySize, verticalCitySize, thiefs + 1, newsFeed));
         }
 
         for (int police = 0; police < numberOfEachType; police++)
         {
-            persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1));
+            persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1, newsFeed));
         }
 
 
         List<Person> lifePrisoners = new List<Person>();
-        Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666);
+        Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666, newsFeed);
         lifer.XPosition = horizontalCitySize + 3;
         lifer.YPosition = 5;
 

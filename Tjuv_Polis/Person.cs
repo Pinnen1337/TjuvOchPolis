@@ -13,8 +13,9 @@ public class Person
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
     public bool IsInPrison {  get; set; }
+    private NewsFeed _newsFeed;
 
-    public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory)
+    public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
     {
         HorizontalSpace = horizontalSpace;
         VerticalSpace = verticalSpace;
@@ -27,6 +28,7 @@ public class Person
 
         ID = iD;
         PersonalInventory = inventory;
+        _newsFeed = newsFeed;
 
     }
 
@@ -43,7 +45,7 @@ public class Person
 
 class Civilian : Person
 {
-    public Civilian(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
+    public Civilian(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
         Symbol = 'C';
         Color = ConsoleColor.Green;
@@ -58,7 +60,7 @@ class Civilian : Person
 class Thief : Person
 {
     public List<Item> StolenItems { get; set; } = new List<Item>();
-    public Thief(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
+    public Thief(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
 
         Symbol = 'T';
@@ -77,7 +79,6 @@ class Thief : Person
             civilian.PersonalInventory.RemoveItem(itemToSteal);
 
             Console.WriteLine($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.");
-            //Console.ReadKey();
         }
     }
 
@@ -100,7 +101,7 @@ class Thief : Person
 class Police : Person
 {
     List<Item> ConfiscatedItems { get; set; } = new List<Item>();
-    public Police(int horizontalSpace, int verticalSpace, int iD) : base(horizontalSpace, verticalSpace, iD, new Inventory())
+    public Police(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
         Symbol = 'P';
         Color = ConsoleColor.Blue;
