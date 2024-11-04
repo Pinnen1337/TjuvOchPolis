@@ -1,45 +1,42 @@
-﻿using System;
-namespace Tjuv_Polis
+﻿namespace Tjuv_Polis;
+
+public class Item
 {
-	public class Item
+	public string KindOfItem { get; set; }
+
+	public Item(string kindOfItem)
 	{
-		public string KindOfItem { get; set; }
-
-		public Item(string kindOfItem)
-		{
-			KindOfItem = kindOfItem;
-		}
+		KindOfItem = kindOfItem;
 	}
+}
 
-	class Wallet : Item
+class Wallet : Item
+{
+	public Wallet() : base("Wallet")
 	{
-		public Wallet() : base("Wallet")
-		{
-		}
 	}
+}
 
-	class Watch : Item
+class Watch : Item
+{
+	public Watch() : base("Watch")
 	{
-		public Watch() : base("Watch")
-		{
 
-		}
 	}
+}
 
-	class Phone : Item
+class Phone : Item
+{
+	public Phone() : base("Phone")
 	{
-		public Phone() : base("Phone")
-		{
 
-		}
 	}
+}
 
-	class Keys : Item
+class Keys : Item
+{
+	public Keys() : base("Keys")
 	{
-		public Keys() : base("Keys")
-		{
 
-		}
 	}
-
 }

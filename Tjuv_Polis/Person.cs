@@ -1,7 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-
-namespace Tjuv_Polis;
+﻿namespace Tjuv_Polis;
 
 public class Person
 {
