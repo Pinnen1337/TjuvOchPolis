@@ -2,11 +2,6 @@
 
 public class Helper
 {
-    private NewsFeed _newsFeed;
-    public Helper(NewsFeed newsFeed)
-    {
-        _newsFeed = newsFeed;
-    }
     public static bool CheckCollision(List<Person> persons)
     {
         List<Person> personsAtSameLocation = new List<Person>();
@@ -31,8 +26,7 @@ public class Helper
                         }
                         else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
                         {
-                            Console.WriteLine($"Police {currentpolice.ID} interacted with Civilian {civilian.ID}.");
-
+                            currentpolice.Greet(civilian);
                         }
                     }
                 }
