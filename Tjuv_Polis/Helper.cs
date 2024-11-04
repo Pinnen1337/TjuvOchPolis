@@ -1,8 +1,9 @@
-﻿namespace Tjuv_Polis;
+﻿
+namespace Tjuv_Polis;
 
 public class Helper
 {
-    public static bool CheckCollision(List<Person> persons)
+    public static void CheckCollision(List<Person> persons)
     {
         List<Person> personsAtSameLocation = new List<Person>();
         List<List<Person>> collidingPersons = new List<List<Person>>();
@@ -32,6 +33,24 @@ public class Helper
                 }
             }
         }
-        return false;
+    }
+    public static List<Person> LoadPersons(int numberOfEachType, NewsFeed newsFeed, int horizontalCitySize, int verticalCitySize)
+    {
+        List<Person> persons = new List<Person>();
+        for (int civilians = 0; civilians < numberOfEachType; civilians++)
+        {
+            persons.Add(new Civilian(horizontalCitySize, verticalCitySize, civilians + 1, newsFeed));
+        }
+
+        for (int thiefs = 0; thiefs < numberOfEachType; thiefs++)
+        {
+            persons.Add(new Thief(horizontalCitySize, verticalCitySize, thiefs + 1, newsFeed));
+        }
+
+        for (int police = 0; police < numberOfEachType; police++)
+        {
+            persons.Add(new Police(horizontalCitySize, verticalCitySize, police + 1, newsFeed));
+        }
+        return persons;
     }
 }
