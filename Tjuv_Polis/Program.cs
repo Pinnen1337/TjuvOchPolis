@@ -17,7 +17,7 @@ public class Program
         int statusRow = verticalCitySize + 2;
         int messageRow = statusRow + numberOfEachType * 3;
 
-        NewsFeed newsFeed = new NewsFeed();
+        NewsFeed newsFeed = new NewsFeed( 0 , verticalCitySize + numberOfEachType * 3 + 5, 5);
 
         for (int civilians = 0; civilians < numberOfEachType; civilians++)
         {
