@@ -136,5 +136,10 @@ class Police : Person
             : "";
         return $"{base.Status()}{confiscatedItemsStatus}";
     }
+
+    internal void Greet(Civilian civilian)
+    {
+        _newsFeed.Add($"Police {ID} interacted with Civilian {civilian.ID}.");
+    }
 }
 
