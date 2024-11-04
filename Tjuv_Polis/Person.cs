@@ -13,7 +13,7 @@ public class Person
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
     public bool IsInPrison {  get; set; }
-    private NewsFeed _newsFeed;
+    protected NewsFeed _newsFeed;
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
     {
@@ -78,15 +78,15 @@ class Thief : Person
             StolenItems.Add(itemToSteal);
             civilian.PersonalInventory.RemoveItem(itemToSteal);
 
-            Console.WriteLine($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.");
+            _newsFeed.Add($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.");
         }
     }
 
     public void Imprison()
     {
         IsInPrison = true;
-        
-        Console.WriteLine($"Thief {ID} has been sent to prison!");
+
+        _newsFeed.Add($"Thief {ID} has been sent to prison!");
     }
 
     public override string Status()
@@ -123,9 +123,8 @@ class Police : Person
 
             stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');
 
-            Console.WriteLine($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
+            _newsFeed.Add($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
             thief.Imprison();
-            //Console.ReadKey();
         }
     }
 
