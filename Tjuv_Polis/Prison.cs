@@ -15,6 +15,7 @@ public class Prison
         StartDrawPrisonAt = city.HorisontalWallLength;
     }
 
+    // TODO we need a method that adds a person to the PersonsInPrison list and also sets the correct positions and most importantly the correct Space properties.
     public void Move()
     {
         foreach (Person person in PersonsInPrison)

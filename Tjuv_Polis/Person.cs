@@ -87,6 +87,7 @@ class Thief : Person
         IsInPrison = true;
 
         _newsFeed.Add($"Thief {ID} has been sent to prison!");
+        // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
     }
 
     public override string Status()
