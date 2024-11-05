@@ -33,7 +33,7 @@ namespace Tjuv_Polis
                 }
 
                 Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
-                Console.Write(new string(' ', 100)); // Rensa raden
+                Console.Write(new string(' ', 120)); // Rensa raden
                 Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
                 Console.WriteLine(person.Status());
                 rowOffset++;
