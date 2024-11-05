@@ -14,6 +14,7 @@ public class Person
     public Inventory PersonalInventory { get; set; }
     public bool IsInPrison {  get; set; }
     protected NewsFeed _newsFeed;
+    public Helper Helper { get; set; }
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
     {
@@ -29,6 +30,7 @@ public class Person
         ID = iD;
         PersonalInventory = inventory;
         _newsFeed = newsFeed;
+
 
     }
 
@@ -87,6 +89,9 @@ class Thief : Person
 
         _newsFeed.AddMessageAndWriteQueue($"Thief {ID} has been sent to prison!");
         // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
+
+        Helper.PersonsInCity.Remove(this);
+        Helper.Prisoners.Add(this);
     }
 
     public override string Status()

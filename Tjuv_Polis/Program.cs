@@ -19,15 +19,22 @@ public class Program
 
         NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 5);
 
-        List<Person> persons = Helper.LoadPersons(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
-        StatusList statuslist = new StatusList(persons, horizontalCitySize + horizontalPrisonSize + 4, 0);
-
+        // Skapa först lifePrisoners-listan
         List<Person> lifePrisoners = new List<Person>();
-        //Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666, newsFeed);
-        //lifer.XPosition = horizontalCitySize + 3;
-        //lifer.YPosition = 5;
-        //lifePrisoners.Add(lifer);
 
+        // Skapa persons-listan först (utan helper, eftersom helper ännu inte existerar)
+        List<Person> persons = PersonLoader.Load(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
+
+        // Skapa sedan Helper-instansen, nu när både persons och lifePrisoners existerar
+        Helper helper = new Helper(persons, lifePrisoners);
+
+        // Tilldela helper till alla personer om det behövs (alternativt kan du uppdatera PersonLoader att ta en null helper som uppdateras senare)
+        foreach (var person in persons)
+        {
+            person.Helper = helper;
+        }
+
+        StatusList statuslist = new StatusList(persons, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         City city = new City(horizontalCitySize, verticalCitySize, persons);
         city.DrawCity();
@@ -36,7 +43,6 @@ public class Program
         prison.DrawPrison();
 
         PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
-
         poorhouse.DrawPoorHouse(city, prison);
 
         bool isPaused = false;
@@ -44,13 +50,12 @@ public class Program
 
         while (isProgramRunning)
         {
-            // Kolla om mellanslag har tryckts för att starta/pausa simuleringen
             if (Console.KeyAvailable)
             {
                 ConsoleKey key = Console.ReadKey(true).Key;
                 if (key == ConsoleKey.Spacebar)
                 {
-                    isPaused = !isPaused; // Växla mellan paus och start
+                    isPaused = !isPaused;
                 }
                 if (key == ConsoleKey.Q)
                 {
@@ -63,7 +68,7 @@ public class Program
                 city.Move();
                 prison.Move();
                 statuslist.Write();
-                Helper.CheckCollision(persons);
+                helper.CheckCollision();
             }
 
             Thread.Sleep(100);
