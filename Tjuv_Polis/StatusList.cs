@@ -18,14 +18,31 @@ namespace Tjuv_Polis
         internal void Write()
         {
             int rowOffset = 0;
+            Type previousType = _persons[0].GetType();
+
             foreach (var person in _persons)
             {
-                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset);
-                Console.Write(new string(' ', 50)); // Rensa raden
-                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset);
+                Type currentType = person.GetType();
+
+                if (currentType != previousType)
+                {
+                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
+                    Console.WriteLine(new string('-', 100));
+                    previousType = currentType;
+                    rowOffset++; // Flytta ner en rad för nästa rad
+                }
+
+                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
+                Console.Write(new string(' ', 100)); // Rensa raden
+                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
                 Console.WriteLine(person.Status());
                 rowOffset++;
             }
+
+            Console.SetCursorPosition(_startDrawAtX, _startDrawAtY);
+            Console.Write(new string($"{"STATUS",7}"));
+            Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + 1);
+            Console.Write(new string('=', 100));
         }
     }
 }

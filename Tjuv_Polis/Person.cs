@@ -38,7 +38,6 @@ public class Person
         string inventoryStatus = PersonalInventory.Items.Count > 0
             ? string.Join(" ", PersonalInventory.Items.Select(item => "[" + item.KindOfItem + "]"))
             : "";
-
         return $"{GetType().Name} {ID}: \t ({XPosition}, {YPosition}) \t {inventoryStatus}";
     }
 }
@@ -93,10 +92,11 @@ class Thief : Person
     public override string Status()
     {
             string stolenItemsStatus = StolenItems.Count > 0
-                ? string.Join(" ", StolenItems.Select(item => "[" + item.KindOfItem + "]"))
+                ? string.Join(" ",StolenItems.Select(item => "[" + item.KindOfItem + "]"))
                 : "";
-            return $"{base.Status()} {(IsInPrison ? "[In Prison]" : "")}{stolenItemsStatus}";
+            return $"{base.Status()}{(IsInPrison ? "[In Prison]" : "")}{stolenItemsStatus}";
     }
+
 }
 
 class Police : Person
