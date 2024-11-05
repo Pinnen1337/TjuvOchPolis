@@ -78,7 +78,7 @@ class Thief : Person
             StolenItems.Add(itemToSteal);
             civilian.PersonalInventory.RemoveItem(itemToSteal);
 
-            _newsFeed.Add($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.");
+            _newsFeed.AddMessageAndWriteQueue($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.");
         }
     }
 
@@ -86,7 +86,7 @@ class Thief : Person
     {
         IsInPrison = true;
 
-        _newsFeed.Add($"Thief {ID} has been sent to prison!");
+        _newsFeed.AddMessageAndWriteQueue($"Thief {ID} has been sent to prison!");
         // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
     }
 
@@ -124,7 +124,7 @@ class Police : Person
 
             stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');
 
-            _newsFeed.Add($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
+            _newsFeed.AddMessageAndWriteQueue($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
             thief.Imprison();
         }
     }
@@ -139,7 +139,7 @@ class Police : Person
 
     internal void Greet(Civilian civilian)
     {
-        _newsFeed.Add($"Police {ID} interacted with Civilian {civilian.ID}.");
+        _newsFeed.AddMessageAndWriteQueue($"Police {ID} interacted with Civilian {civilian.ID}.");
     }
 }
 

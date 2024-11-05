@@ -15,9 +15,10 @@ public class Program
         int statusRow = verticalCitySize + 2;
         int messageRow = statusRow + numberOfEachType * 3;
 
-        NewsFeed newsFeed = new NewsFeed( 0 , verticalCitySize + numberOfEachType * 3 + 5, 5);
+        NewsFeed newsFeed = new NewsFeed( 0 , verticalCitySize + 3, 5);
 
         List<Person> persons = Helper.LoadPersons(10, newsFeed, horizontalCitySize, verticalCitySize);
+        StatusList statuslist = new StatusList(persons, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         List<Person> lifePrisoners = new List<Person>();
         Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666, newsFeed);
@@ -36,28 +37,11 @@ public class Program
         
         poorhouse.DrawPoorHouse(city, prison);
 
-        Console.SetCursorPosition(0, messageRow);
-        Console.Write(new string('-', horizontalCitySize));
-
         while (true)
         {
             city.Move();
             prison.Move();
-
-            for (int i = 0; i < persons.Count; i++)
-            {
-                Console.SetCursorPosition(0, statusRow + i);
-                Console.Write(new string(' ', horizontalCitySize)); // Rensa raden
-                Console.SetCursorPosition(0, statusRow + i);
-                Console.WriteLine(persons[i].Status());
-            }
-            //for (int i = 0; i < 4; i++) // rensar nu 4 rader då det har hänt en gång
-            //{
-            //    Console.SetCursorPosition(0, messageRow + i + 1);
-            //    Console.Write(new string(' ', horizontalCitySize));
-            //}
-
-            Console.SetCursorPosition(0, messageRow + 1);
+            statuslist.Write();
             Helper.CheckCollision(persons);
 
             Thread.Sleep(100);

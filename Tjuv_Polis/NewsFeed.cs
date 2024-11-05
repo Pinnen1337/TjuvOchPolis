@@ -15,8 +15,11 @@ public class NewsFeed
         _startDrawAtX = positionX;
         _startDrawAtY = positionY;
         _maxCount = maxCount;
+
+        Console.SetCursorPosition(_startDrawAtX, _startDrawAtY - 1);
+        Console.Write($"{"NEWS FEED",10}");
     }
-    public void Add(string text)
+    public void AddMessageAndWriteQueue(string text)
     {
         Message message = new Message(messageCounter, text);
         messageCounter++;
@@ -30,6 +33,7 @@ public class NewsFeed
 
     private void Write()
     {
+
         int rowOffset = 0;
         foreach (var news in NewsQueue.Reverse())
         {
