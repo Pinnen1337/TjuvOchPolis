@@ -8,7 +8,7 @@ public class Program
 
         int numberOfEachType = 10;
         int numberOfCivilians = 15;
-        int numberOfThiefs = 10;
+        int numberOfThiefs = 20;
         int numberOfPolice = 5;
         int horizontalCitySize = 100;
         int verticalCitySize = 25;
@@ -20,7 +20,6 @@ public class Program
         NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 5);
 
         List<Person> persons = Helper.LoadPersons(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
-        StatusList statuslist = new StatusList(persons, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         List<Person> lifePrisoners = new List<Person>();
         //Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666, newsFeed);
@@ -30,9 +29,12 @@ public class Program
 
 
         City city = new City(horizontalCitySize, verticalCitySize, persons);
-        city.DrawCity();
-
         Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, lifePrisoners, city);
+        StatusList statuslist = new StatusList(persons, prison.PersonsInPrison, horizontalCitySize + horizontalPrisonSize + 4, 0);
+
+        city.PrisonNextToCity = prison;
+
+        city.DrawCity();
         prison.DrawPrison();
 
         PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
@@ -63,7 +65,8 @@ public class Program
                 city.Move();
                 prison.Move();
                 statuslist.Write();
-                City.CheckCollision(persons);
+                city.CheckCollision();
+                city.MoveArrestedToPrison();
             }
 
             Thread.Sleep(100);

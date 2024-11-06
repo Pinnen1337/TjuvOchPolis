@@ -12,7 +12,6 @@ public class Person
     public char Symbol { get; set; }
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
-    public bool IsInPrison {  get; set; }
     protected NewsFeed _newsFeed;
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
@@ -74,7 +73,7 @@ class Thief : Person
     {
         if (!IsArrested && civilian.PersonalInventory.Items.Count > 0)
         {
-            
+
             int randomIndex = Random.Shared.Next(civilian.PersonalInventory.Items.Count);
             Item itemToSteal = civilian.PersonalInventory.Items[randomIndex];
             StolenItems.Add(itemToSteal);
@@ -84,19 +83,11 @@ class Thief : Person
         }
     }
 
-    public void Imprison()
-    {
-        IsInPrison = true;
-
-        _newsFeed.AddMessageAndWriteQueue($"Thief {ID} has been sent to prison!");
-        // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
-    }
-
     public override string Status()
     {
-            string stolenItemsStatus = StolenItems.Count > 0
-                ? string.Join(" ",StolenItems.Select(item => "[" + item.KindOfItem + "]"))
-                : "";
+        string stolenItemsStatus = StolenItems.Count > 0
+            ? string.Join(" ", StolenItems.Select(item => "[" + item.KindOfItem + "]"))
+            : "";
         return $"{base.Status()}{(IsArrested ? "[In Prison]" : "")}{stolenItemsStatus}";
     }
 
@@ -130,6 +121,14 @@ class Police : Person
 
             _newsFeed.AddMessageAndWriteQueue($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
         }
+    }
+
+    public void Arrest(Thief thief)
+    {
+        thief.IsArrested = true;
+
+        _newsFeed.AddMessageAndWriteQueue($"Thief {ID} has been sent to prison!");
+        // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
     }
 
     public override string Status()

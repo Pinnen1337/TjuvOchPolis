@@ -1,12 +1,15 @@
-﻿namespace Tjuv_Polis;
+﻿
+namespace Tjuv_Polis;
 
 public class City
 {
     public int HorisontalWallLength { get; set; }
     public int VerticalWallLength { get; set; }
     public List<Person> PersonsInCity { get; set; }
+    public Prison PrisonNextToCity { get; set; }
+    
 
-public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
+    public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
     {
         HorisontalWallLength = horisontalSize;
         VerticalWallLength = verticalSize;
@@ -17,37 +20,37 @@ public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
     {
         foreach (Person person in PersonsInCity)
         {
-        Console.SetCursorPosition(person.XPosition, person.YPosition);
-        Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
+            Console.SetCursorPosition(person.XPosition, person.YPosition);
+            Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
 
-        int newXPosition = person.XPosition + person.MovementX;
-        int newYPosition = person.YPosition + person.MovementY;
+            int newXPosition = person.XPosition + person.MovementX;
+            int newYPosition = person.YPosition + person.MovementY;
 
-        if (newXPosition < 1)
-        {
-            newXPosition = person.HorizontalSpace - 2;
-        }
-        if (newYPosition < 1)
-        {
-            newYPosition = person.VerticalSpace - 1;
-        }
-        if (newYPosition >= person.VerticalSpace)
-        {
-            newYPosition = 2;
-        }
-        if (newXPosition >= person.HorizontalSpace - 1)
-        {
-            newXPosition = 2;
-        }
+            if (newXPosition < 1)
+            {
+                newXPosition = person.HorizontalSpace - 2;
+            }
+            if (newYPosition < 1)
+            {
+                newYPosition = person.VerticalSpace - 1;
+            }
+            if (newYPosition >= person.VerticalSpace)
+            {
+                newYPosition = 2;
+            }
+            if (newXPosition >= person.HorizontalSpace - 1)
+            {
+                newXPosition = 2;
+            }
 
-        person.XPosition = newXPosition;
-        person.YPosition = newYPosition;
+            person.XPosition = newXPosition;
+            person.YPosition = newYPosition;
 
-        // Rita personen på nya positionen
-        Console.SetCursorPosition(person.XPosition, person.YPosition);
-        Console.ForegroundColor = person.Color;
-        Console.Write(person.Symbol);
-        Console.ResetColor();
+            // Rita personen på nya positionen
+            Console.SetCursorPosition(person.XPosition, person.YPosition);
+            Console.ForegroundColor = person.Color;
+            Console.Write(person.Symbol);
+            Console.ResetColor();
 
         }
     }
@@ -82,9 +85,9 @@ public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
         int cursorPositionTop = 1;
         for (int wall = 0; wall < VerticalWallLength; wall++)
         {
-            Console.SetCursorPosition(cursorPositionLeft, cursorPositionTop); 
+            Console.SetCursorPosition(cursorPositionLeft, cursorPositionTop);
             Console.Write("░");  //Vänster vägg
-            Console.SetCursorPosition(cursorPositionLeft + HorisontalWallLength -1, cursorPositionTop);
+            Console.SetCursorPosition(cursorPositionLeft + HorisontalWallLength - 1, cursorPositionTop);
             Console.WriteLine("░"); //Höger vägg
             cursorPositionTop++;
         }
@@ -117,6 +120,23 @@ public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
                     }
                 }
             }
+        }
+    }
+
+    internal void MoveArrestedToPrison()
+    {
+        List<Person> prisonTransport = new List<Person>();
+        foreach (Person thisPerson in PersonsInCity)
+        {
+            if (thisPerson is Thief thief && thief.IsArrested == true)
+            {
+                prisonTransport.Add(thisPerson);
+            }
+        }
+        PrisonNextToCity.PersonsInPrison.AddRange(prisonTransport);
+        foreach (Thief thief in prisonTransport)
+        {
+            PersonsInCity.Remove(thief);
         }
     }
 }
