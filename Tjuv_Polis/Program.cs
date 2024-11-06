@@ -63,7 +63,7 @@ public class Program
                 city.Move();
                 prison.Move();
                 statuslist.Write();
-                Helper.CheckCollision(persons);
+                City.CheckCollision(persons);
             }
 
             Thread.Sleep(100);
