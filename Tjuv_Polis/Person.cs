@@ -107,7 +107,7 @@ class Police : Person
         Symbol = 'P';
         Color = ConsoleColor.Blue;
     }
-    public void ConfiscateAndArrest(Thief thief)
+    public void ConfiscateAllItems(Thief thief)
     {
         if (!thief.IsInPrison && thief.StolenItems.Count > 0)
         {
@@ -125,7 +125,6 @@ class Police : Person
             stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');
 
             _newsFeed.AddMessageAndWriteQueue($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.");
-            thief.Imprison();
         }
     }
 

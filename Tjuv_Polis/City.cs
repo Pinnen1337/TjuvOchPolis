@@ -106,7 +106,8 @@ public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
                         }
                         else if (thisPerson is Thief currentthief && otherPerson is Police police)
                         {
-                            police.ConfiscateAndArrest(currentthief);
+                            police.ConfiscateAllItems(currentthief);
+                            police.Arrest(currentthief);
 
                         }
                         else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
