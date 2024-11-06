@@ -48,6 +48,15 @@ namespace Tjuv_Polis
 
             foreach (var person in _personsInPrison)
             {
+                Type currentType = person.GetType();
+
+                if (currentType != previousType)
+                {
+                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
+                    Console.WriteLine(new string('-', 100));
+                    previousType = currentType;
+                    rowOffset++; // Flytta ner en rad för nästa rad
+                }
                 Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
                 Console.Write(new string(' ', 120)); // Rensa raden
                 Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);

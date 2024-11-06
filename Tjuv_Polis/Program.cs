@@ -8,7 +8,7 @@ public class Program
 
         int numberOfEachType = 10;
         int numberOfCivilians = 15;
-        int numberOfThiefs = 20;
+        int numberOfThiefs = 10;
         int numberOfPolice = 5;
         int horizontalCitySize = 100;
         int verticalCitySize = 25;
