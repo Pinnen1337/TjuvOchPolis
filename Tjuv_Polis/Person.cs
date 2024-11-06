@@ -59,17 +59,20 @@ class Civilian : Person
 class Thief : Person
 {
     public List<Item> StolenItems { get; set; } = new List<Item>();
+    public bool IsArrested { get; set; }
+
     public Thief(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
 
         Symbol = 'T';
         Color = ConsoleColor.Red;
+        IsArrested = false;
 
     }
 
     public void Steal(Civilian civilian)
     {
-        if (!IsInPrison && civilian.PersonalInventory.Items.Count > 0)
+        if (!IsArrested && civilian.PersonalInventory.Items.Count > 0)
         {
             
             int randomIndex = Random.Shared.Next(civilian.PersonalInventory.Items.Count);
@@ -94,8 +97,9 @@ class Thief : Person
             string stolenItemsStatus = StolenItems.Count > 0
                 ? string.Join(" ",StolenItems.Select(item => "[" + item.KindOfItem + "]"))
                 : "";
-            return $"{base.Status()}{(IsInPrison ? "[In Prison]" : "")}{stolenItemsStatus}";
+        return $"{base.Status()}{(IsArrested ? "[In Prison]" : "")}{stolenItemsStatus}";
     }
+
 
 }
 
@@ -109,7 +113,7 @@ class Police : Person
     }
     public void ConfiscateAllItems(Thief thief)
     {
-        if (!thief.IsInPrison && thief.StolenItems.Count > 0)
+        if (!thief.IsArrested && thief.StolenItems.Count > 0)
         {
             string stolenItemsAsString = "";
 
