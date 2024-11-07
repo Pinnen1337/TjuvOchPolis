@@ -27,10 +27,10 @@ namespace Tjuv_Polis
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + 1);
             Console.Write(new string('=', 100));
 
-            for (int i = 2; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
                 // Välj rätt lista baserat på värdet av `i`
-                var currentList = (i == 2) ? _persons : _personsInPrison;
+                var currentList = (i == 0) ? _persons : _personsInPrison;
 
                 foreach (var person in currentList)
                 {
@@ -38,15 +38,15 @@ namespace Tjuv_Polis
 
                     if (currentType != previousType)
                     {
-                        Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + i);
+                        Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
                         Console.WriteLine(new string('-', 100));
                         previousType = currentType;
                         rowOffset++; // Flytta ner en rad för nästa rad
                     }
 
-                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + i);
+                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
                     Console.Write(new string(' ', 120)); // Rensa raden
-                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + i);
+                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
                     Console.WriteLine(person.Status());
                     rowOffset++;
                 }
