@@ -19,7 +19,7 @@ public class Program
 
         NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 5);
 
-        List<Person> persons = PersonFactory.LoadPersons(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
+        List<Person> persons = PersonFactory.Create(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
 
         List<Person> lifePrisoners = new List<Person>();
         //Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666, newsFeed);

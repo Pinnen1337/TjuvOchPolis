@@ -1,6 +1,6 @@
 ﻿namespace Tjuv_Polis;
 
-public class HallåJagSitteriDiscord 
+public class Person 
 {
     public int ID { get; set; }
     public int XPosition { get; set; }

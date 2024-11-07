@@ -1,7 +1,7 @@
 ﻿
 namespace Tjuv_Polis;
 
-public class PersonListFactory
+public class PersonFactory
 {
 
     public static List<Person> Create(int numberOfCivilians, int numberOfThiefs, int numberOfPolice, NewsFeed newsFeed, int horizontalCitySize, int verticalCitySize)
