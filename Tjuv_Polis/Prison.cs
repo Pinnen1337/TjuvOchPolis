@@ -94,4 +94,9 @@ public class Prison
             cursorPositionTop++;
         }
     }
+    public bool CheckSentenceTime(Thief prisoner)
+    {
+        // if (prisoner.) // Todo 
+
+    }
 }

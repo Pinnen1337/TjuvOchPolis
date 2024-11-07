@@ -142,7 +142,8 @@ public class City
                 thief.YPosition = 2; // Sätt en startposition inom fängelset
                 thief.HorizontalSpace = PrisonNextToCity.HorisontalWallLength;
                 thief.VerticalSpace = PrisonNextToCity.VerticalWallLength;
-
+                thief.SentenceStart = DateTime.Now;
+                thief.SentenceEnd = DateTime.Now.AddSeconds(5);
                 prisonTransport.Add(thisPerson);
             }
         }

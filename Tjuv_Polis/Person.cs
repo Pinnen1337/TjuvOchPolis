@@ -59,6 +59,8 @@ class Thief : Person
 {
     public List<Item> StolenItems { get; set; } = new List<Item>();
     public bool IsArrested { get; set; }
+    public DateTime ? SentenceStart { get; set; }
+    public DateTime ? SentenceEnd { get; set; }
 
     public Thief(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
@@ -144,4 +146,3 @@ class Police : Person
         _newsFeed.AddMessageAndWriteQueue($"Police {ID} interacted with Civilian {civilian.ID}.");
     }
 }
-
