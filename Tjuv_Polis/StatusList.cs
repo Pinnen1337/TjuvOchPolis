@@ -23,7 +23,7 @@ namespace Tjuv_Polis
             Type previousType = _persons[0].GetType();
 
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY);
-            Console.Write(new string($"{"STATUS",7}"));
+            Console.Write(new string($"{"STATUS:",7}\tCIVILIANS: {NumberOfCiviliansInCity(),2:D}\t\tPOLICE:{NumberOfPoliceInCity(),2:D}\t    THIEFS: {NumberOfThiefsInCity(),2:D}\t\tPRISONERS:{_personsInPrison.Count,2:D}"));
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + 1);
             Console.Write(new string('=', 100));
 
@@ -51,6 +51,36 @@ namespace Tjuv_Polis
                     rowOffset++;
                 }
             }
+        }
+        private int NumberOfCiviliansInCity()
+        {
+            int count = 0;
+            foreach (Person person in _persons)
+            { 
+                if(person is Civilian)
+                    count++;
+            }
+            return count;
+        }
+        private int NumberOfThiefsInCity()
+        {
+            int count = 0;
+            foreach (Person person in _persons)
+            {
+                if (person is Thief)
+                    count++;
+            }
+            return count;
+        }
+        private int NumberOfPoliceInCity()
+        {
+            int count = 0;
+            foreach (Person person in _persons)
+            {
+                if (person is Police)
+                    count++;
+            }
+            return count;
         }
     }
 }
