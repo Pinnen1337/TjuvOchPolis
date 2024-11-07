@@ -109,8 +109,15 @@ public class City
                         }
                         else if (thisPerson is Thief currentthief && otherPerson is Police police)
                         {
+                            if (currentthief.StolenItems.Count > 0)
+                            {
                             police.ConfiscateAllItems(currentthief);
                             police.Arrest(currentthief);
+                            }
+                            //else // Todo. Kolla om det går att få ut ett meddelande om Polis och Tjuv möts när tjuven inte har tagit något.
+                            //{
+                            //    _newsFeed.AddMessageAndWriteQueue($"Police {police.ID} interacted with Thief {currentThief.ID} but found no stolen items.");
+                            //}
 
                         }
                         else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
