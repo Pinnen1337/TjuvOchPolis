@@ -27,42 +27,30 @@ namespace Tjuv_Polis
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + 1);
             Console.Write(new string('=', 100));
 
-            foreach (var person in _persons)
+            for (int i = 2; i < 4; i++)
             {
-                Type currentType = person.GetType();
+                // Välj rätt lista baserat på värdet av `i`
+                var currentList = (i == 2) ? _persons : _personsInPrison;
 
-                if (currentType != previousType)
+                foreach (var person in currentList)
                 {
-                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
-                    Console.WriteLine(new string('-', 100));
-                    previousType = currentType;
-                    rowOffset++; // Flytta ner en rad för nästa rad
+                    Type currentType = person.GetType();
+
+                    if (currentType != previousType)
+                    {
+                        Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + i);
+                        Console.WriteLine(new string('-', 100));
+                        previousType = currentType;
+                        rowOffset++; // Flytta ner en rad för nästa rad
+                    }
+
+                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + i);
+                    Console.Write(new string(' ', 120)); // Rensa raden
+                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + i);
+                    Console.WriteLine(person.Status());
+                    rowOffset++;
                 }
-
-                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
-                Console.Write(new string(' ', 120)); // Rensa raden
-                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
-                Console.WriteLine(person.Status());
-                rowOffset++;
             }
-
-            foreach (var person in _personsInPrison)
-            {
-                Type currentType = person.GetType();
-
-                if (currentType != previousType)
-                {
-                    Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
-                    Console.WriteLine(new string('-', 100));
-                    previousType = currentType;
-                    rowOffset++; // Flytta ner en rad för nästa rad
-                }
-                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
-                Console.Write(new string(' ', 120)); // Rensa raden
-                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
-                Console.WriteLine(person.Status());
-            }
-
         }
     }
 }
