@@ -130,6 +130,12 @@ public class City
         {
             if (thisPerson is Thief thief && thief.IsArrested == true)
             {
+                // Justera tjuvens position och utrymme för fängelset
+                thief.XPosition = PrisonNextToCity.StartDrawPrisonAt + 2;
+                thief.YPosition = 2; // Sätt en startposition inom fängelset
+                thief.HorizontalSpace = PrisonNextToCity.HorisontalWallLength;
+                thief.VerticalSpace = PrisonNextToCity.VerticalWallLength;
+
                 prisonTransport.Add(thisPerson);
             }
         }
