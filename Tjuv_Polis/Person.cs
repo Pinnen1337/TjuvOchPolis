@@ -127,7 +127,7 @@ class Police : Person
     {
         thief.IsArrested = true;
 
-        _newsFeed.AddMessageAndWriteQueue($"Thief {ID} has been sent to prison!");
+        _newsFeed.AddMessageAndWriteQueue($"Thief {thief.ID} has been sent to prison!");
         // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
     }
 
