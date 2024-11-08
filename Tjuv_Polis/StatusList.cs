@@ -62,22 +62,22 @@ namespace Tjuv_Polis
             }
             return count;
         }
-        private int NumberOfThiefsInCity()
-        {
-            int count = 0;
-            foreach (Person person in _persons)
-            {
-                if (person is Thief)
-                    count++;
-            }
-            return count;
-        }
         private int NumberOfPoliceInCity()
         {
             int count = 0;
             foreach (Person person in _persons)
             {
                 if (person is Police)
+                    count++;
+            }
+            return count;
+        }
+        private int NumberOfThiefsInCity()
+        {
+            int count = 0;
+            foreach (Person person in _persons)
+            {
+                if (person is Thief)
                     count++;
             }
             return count;

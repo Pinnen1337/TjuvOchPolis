@@ -120,10 +120,10 @@ public class City
                             //}
 
                         }
-                        else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
-                        {
-                            currentpolice.Greet(civilian);
-                        }
+                        //else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
+                        //{
+                        //    currentpolice.Greet(civilian);
+                        //}
                     }
                 }
             }
@@ -138,8 +138,8 @@ public class City
             if (thisPerson is Thief thief && thief.IsArrested == true)
             {
                 // Justera tjuvens position och utrymme för fängelset
-                thief.XPosition = PrisonNextToCity.StartDrawPrisonAt + 2;
-                thief.YPosition = 2; // Sätt en startposition inom fängelset
+                thief.XPosition =  Random.Shared.Next(PrisonNextToCity.StartDrawPrisonAt + 2, PrisonNextToCity.StartDrawPrisonAt + PrisonNextToCity.HorisontalWallLength);
+                thief.YPosition = Random.Shared.Next(2, 2 + PrisonNextToCity.VerticalWallLength); // Sätt en startposition inom fängelset
                 thief.HorizontalSpace = PrisonNextToCity.HorisontalWallLength;
                 thief.VerticalSpace = PrisonNextToCity.VerticalWallLength;
                 thief.SentenceStart = DateTime.Now;

@@ -1,6 +1,5 @@
 ﻿
 namespace Tjuv_Polis;
-
 public class NewsFeed
 {
     public Queue<Message> NewsQueue { get; }
@@ -18,6 +17,17 @@ public class NewsFeed
 
         Console.SetCursorPosition(_startDrawAtX, _startDrawAtY - 1);
         Console.Write($"{"NEWS FEED",10}");
+    }
+    public void AddMessageAndWriteQueue(string text, ConsoleColor color)
+    {
+        Message message = new Message(messageCounter, text, color);
+        messageCounter++;
+        NewsQueue.Enqueue(message);
+        if (NewsQueue.Count > _maxCount)
+        {
+            NewsQueue.Dequeue();
+        }
+        Write();
     }
     public void AddMessageAndWriteQueue(string text)
     {
@@ -40,7 +50,9 @@ public class NewsFeed
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset);
             Console.Write(new string(' ', 100));
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset);
+            Console.ForegroundColor = news.Color;
             Console.Write(news);
+
             rowOffset++;
         }
     }
@@ -48,10 +60,17 @@ public class NewsFeed
     {
         int Count;
         string Text;
+        public ConsoleColor Color { get; set; }
+
         public Message(int count, string text)
         {
             Count = count;
             Text = text;
+            Color = ConsoleColor.White;
+        }
+        public Message(int count, string text, ConsoleColor color) : this(count, text)
+        {
+            Color = color;
         }
         public override string ToString()
         {

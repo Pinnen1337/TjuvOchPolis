@@ -37,7 +37,6 @@ public class Program
 
         city.DrawCity();
         prison.DrawPrison();
-        prison.ReleasePrisoners();
 
         PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
 
@@ -69,6 +68,7 @@ public class Program
                 statuslist.Write();
                 city.CheckCollision();
                 city.MoveArrestedToPrison();
+                prison.ReleasePrisoners();
             }
 
             Thread.Sleep(100);

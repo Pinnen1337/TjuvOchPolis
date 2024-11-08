@@ -1,4 +1,6 @@
-﻿namespace Tjuv_Polis;
+﻿using System;
+
+namespace Tjuv_Polis;
 
 public class Prison
 {
@@ -107,10 +109,16 @@ public class Prison
         {
             if (prisoner is Thief thief && thief.DoneTheTime())
             {
-                thief.XPosition = 2;
-                thief.YPosition = 2; // Sätt en startposition inom city
+                Console.SetCursorPosition(thief.XPosition, thief.YPosition);
+                Console.Write(' '); // Ritar ut ett blanksteg där personen tidigare var.
+
+                thief.XPosition = Random.Shared.Next(2, CityNextToPrison.HorisontalWallLength - 1);
+                thief.YPosition = Random.Shared.Next(2, CityNextToPrison.VerticalWallLength); // Sätt en startposition inom city
+
                 thief.HorizontalSpace = CityNextToPrison.HorisontalWallLength;
                 thief.VerticalSpace = CityNextToPrison.VerticalWallLength;
+
+                thief.IsArrested = false;
 
                 prisonersToRelease.Add(prisoner);
             }
