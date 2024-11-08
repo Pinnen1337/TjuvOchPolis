@@ -92,7 +92,14 @@ class Thief : Person
             : "";
         return $"{base.Status()}{(IsArrested ? "[In Prison]" : "")}{stolenItemsStatus}";
     }
-
+    public bool DoneTheTime()
+    {
+        if (DateTime.Now > this.SentenceEnd)
+        {
+            return true;
+        }
+        return false;
+    }
 
 }
 

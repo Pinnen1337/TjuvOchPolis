@@ -6,15 +6,20 @@ public class Prison
     public int VerticalWallLength { get; set; }
     public List<Person> PersonsInPrison { get; set; }
     public int StartDrawPrisonAt { get; set; }
-     
+
+    public City CityNextToPrison { get; set; }
+
     public Prison(int horisontalSize, int verticalSize, List<Person> personsInPrison, City city)
+
+
     {
         HorisontalWallLength = horisontalSize;
         VerticalWallLength = verticalSize;
         PersonsInPrison = personsInPrison;
         StartDrawPrisonAt = city.HorisontalWallLength;
-    }
+    
 
+    }
     // TODO we need a method that adds a person to the PersonsInPrison list and also sets the correct positions and most importantly the correct Space properties.
     public void Move()
     {
@@ -94,9 +99,26 @@ public class Prison
             cursorPositionTop++;
         }
     }
-    public bool CheckSentenceTime(Thief prisoner)
+    public void ReleasePrisoners()
     {
-        // if (prisoner.) // Todo 
+        List<Person> prisonersToRelease = new List<Person>();
 
+        foreach (Person prisoner in PersonsInPrison)
+        {
+            if (prisoner is Thief thief && thief.DoneTheTime())
+            {
+                thief.XPosition = 2;
+                thief.YPosition = 2; // Sätt en startposition inom city
+                thief.HorizontalSpace = CityNextToPrison.HorisontalWallLength;
+                thief.VerticalSpace = CityNextToPrison.VerticalWallLength;
+
+                prisonersToRelease.Add(prisoner);
+            }
+        }
+        CityNextToPrison.PersonsInCity.AddRange(prisonersToRelease);
+        foreach (Thief thief in prisonersToRelease)
+        {
+            PersonsInPrison.Remove(thief);
+        }
     }
 }

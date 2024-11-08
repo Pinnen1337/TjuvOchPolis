@@ -33,9 +33,11 @@ public class Program
         StatusList statuslist = new StatusList(persons, prison.PersonsInPrison, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         city.PrisonNextToCity = prison;
+        prison.CityNextToPrison = city;
 
         city.DrawCity();
         prison.DrawPrison();
+        prison.ReleasePrisoners();
 
         PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
 
