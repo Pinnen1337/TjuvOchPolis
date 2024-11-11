@@ -124,6 +124,7 @@ public class Prison
             }
         }
         CityNextToPrison.PersonsInCity.AddRange(prisonersToRelease);
+        CityNextToPrison.PersonsInCity.Sort();
         foreach (Thief thief in prisonersToRelease)
         {
             PersonsInPrison.Remove(thief);
