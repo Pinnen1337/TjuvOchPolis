@@ -101,6 +101,7 @@ class Thief : Person
     public bool IsArrested { get; set; }
     public DateTime? SentenceStart { get; set; }
     public DateTime? SentenceEnd { get; set; }
+    public int SentenceInSeconds { get; set; }
 
     public Thief(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
@@ -161,6 +162,7 @@ class Police : Person
             {
                 ConfiscatedItems.Add(item);
                 stolenItemsAsString += item.KindOfItem + ", ";
+                thief.SentenceInSeconds += 5;
             }
 
             // Töm listan efteråt
@@ -176,7 +178,7 @@ class Police : Person
     {
         thief.IsArrested = true;
 
-        _newsFeed.AddMessageAndWriteQueue($"Thief {thief.ID} has been sent to prison!", ConsoleColor.Red);
+        _newsFeed.AddMessageAndWriteQueue($"Thief {thief.ID} has been sent to prison for {thief.SentenceInSeconds} seconds!", ConsoleColor.Red);
         // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
     }
 

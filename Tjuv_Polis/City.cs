@@ -143,7 +143,7 @@ public class City
                 thief.HorizontalSpace = PrisonNextToCity.HorisontalWallLength;
                 thief.VerticalSpace = PrisonNextToCity.VerticalWallLength;
                 thief.SentenceStart = DateTime.Now;
-                thief.SentenceEnd = DateTime.Now.AddSeconds(5);
+                thief.SentenceEnd = DateTime.Now.AddSeconds(thief.SentenceInSeconds);
                 prisonTransport.Add(thisPerson);
             }
         }
