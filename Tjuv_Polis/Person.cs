@@ -4,14 +4,14 @@ public class Person : IComparable
 {
 
     public int ID { get; set; }
-    public int XPosition { get; set; }
+    public int XPosition { get; set ; }
     public int YPosition { get; set; }
     public int MovementX { get; set; }
     public int MovementY { get; set; }
     public int HorizontalSpace { get; set; }
     public int VerticalSpace { get; set; }
-    public char Symbol { get; set; }
-    public ConsoleColor Color { get; set; }
+    public char Symbol { get; protected set; }
+    public ConsoleColor Color { get; protected set; }
     public Inventory PersonalInventory { get; set; }
     public NewsFeed NewsFeed { get;  set; }
 

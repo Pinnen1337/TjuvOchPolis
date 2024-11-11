@@ -3,10 +3,10 @@ namespace Tjuv_Polis;
 
 public class City
 {
-    public int HorisontalWallLength { get; set; }
-    public int VerticalWallLength { get; set; }
-    public List<Person> PersonsInCity { get; set; }
-    public Prison PrisonNextToCity { get; set; }
+    public int HorisontalWallLength { get; init; }
+    public int VerticalWallLength { get; init; }
+    public List<Person> PersonsInCity { get; init; }
+    public Prison ? PrisonNextToCity { get; set; }
     
 
     public City(int horisontalSize, int verticalSize, List<Person> personsInCity)

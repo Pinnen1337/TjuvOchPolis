@@ -1,24 +1,23 @@
-﻿using System;
-
+﻿
 namespace Tjuv_Polis;
 
 public class Prison
 {
-    public int HorisontalWallLength { get; set; }
-    public int VerticalWallLength { get; set; }
+    public int HorisontalWallLength { get; init; }
+    public int VerticalWallLength { get; init; }
+    public int StartDrawPrisonAt { get; init; }
     public List<Person> PersonsInPrison { get; set; }
-    public int StartDrawPrisonAt { get; set; }
 
     public City CityNextToPrison { get; set; }
 
     public Prison(int horisontalSize, int verticalSize, City city)
 
-
     {
         HorisontalWallLength = horisontalSize;
         VerticalWallLength = verticalSize;
-        PersonsInPrison = new List<Person>();
         StartDrawPrisonAt = city.HorisontalWallLength;
+        PersonsInPrison = new List<Person>();
+        CityNextToPrison = city;
     
 
     }
