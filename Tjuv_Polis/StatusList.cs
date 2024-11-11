@@ -50,6 +50,9 @@ namespace Tjuv_Polis
                     Console.WriteLine(person.Status());
                     rowOffset++;
                 }
+                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
+                Console.Write(new string(' ', 120)); // Rensa raden
+                Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 2);
             }
         }
         private int NumberOfCiviliansInCity()
