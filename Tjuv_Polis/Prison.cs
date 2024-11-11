@@ -11,13 +11,13 @@ public class Prison
 
     public City CityNextToPrison { get; set; }
 
-    public Prison(int horisontalSize, int verticalSize, List<Person> personsInPrison, City city)
+    public Prison(int horisontalSize, int verticalSize, City city)
 
 
     {
         HorisontalWallLength = horisontalSize;
         VerticalWallLength = verticalSize;
-        PersonsInPrison = personsInPrison;
+        PersonsInPrison = new List<Person>();
         StartDrawPrisonAt = city.HorisontalWallLength;
     
 
