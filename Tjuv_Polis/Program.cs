@@ -19,18 +19,11 @@ public class Program
 
         NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 5);
 
-        List<Person> persons = PersonFactory.Create(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
+        List<Person> personsInCity = PersonFactory.Create(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
 
-        List<Person> lifePrisoners = new List<Person>();
-        //Thief lifer = new(horizontalPrisonSize, verticalPrisonSize, 666, newsFeed);
-        //lifer.XPosition = horizontalCitySize + 3;
-        //lifer.YPosition = 5;
-        //lifePrisoners.Add(lifer);
-
-
-        City city = new City(horizontalCitySize, verticalCitySize, persons);
-        Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, lifePrisoners, city);
-        StatusList statuslist = new StatusList(persons, prison.PersonsInPrison, horizontalCitySize + horizontalPrisonSize + 4, 0);
+        City city = new City(horizontalCitySize, verticalCitySize, personsInCity);
+        Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, city);
+        StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         city.PrisonNextToCity = prison;
         prison.CityNextToPrison = city;

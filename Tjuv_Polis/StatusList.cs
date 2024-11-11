@@ -9,9 +9,9 @@ namespace Tjuv_Polis
         private readonly int _startDrawAtY;
         private List<Person> _personsInPrison;
 
-        public StatusList(List<Person> persons, List<Person> personsInPrison, int positionX, int positionY)
+        public StatusList(List<Person> personsInCity, List<Person> personsInPrison, int positionX, int positionY)
         {
-            _persons = persons;
+            _persons = personsInCity;
             _personsInPrison = personsInPrison;
             _startDrawAtX = positionX;
             _startDrawAtY = positionY;
