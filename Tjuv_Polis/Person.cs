@@ -13,7 +13,7 @@ public class Person : IComparable
     public char Symbol { get; set; }
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
-    protected NewsFeed _newsFeed;
+    public NewsFeed NewsFeed { get;  set; }
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
     {
@@ -28,7 +28,7 @@ public class Person : IComparable
 
         ID = iD;
         PersonalInventory = inventory;
-        _newsFeed = newsFeed;
+        this.NewsFeed = newsFeed;
 
     }
 
@@ -122,7 +122,7 @@ class Thief : Person
             StolenItems.Add(itemToSteal);
             civilian.PersonalInventory.RemoveItem(itemToSteal);
 
-            _newsFeed.AddMessageAndWriteQueue($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.", ConsoleColor.Yellow);
+            NewsFeed.AddMessageAndWriteQueue($"Thief {ID} stole {itemToSteal.KindOfItem} from Civilian {civilian.ID}.", ConsoleColor.Yellow);
         }
     }
 
@@ -170,7 +170,7 @@ class Police : Person
 
             stolenItemsAsString = stolenItemsAsString.TrimEnd(',', ' ');
 
-            _newsFeed.AddMessageAndWriteQueue($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.", ConsoleColor.Green);
+            NewsFeed.AddMessageAndWriteQueue($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.", ConsoleColor.Green);
         }
     }
 
@@ -178,7 +178,7 @@ class Police : Person
     {
         thief.IsArrested = true;
 
-        _newsFeed.AddMessageAndWriteQueue($"Thief {thief.ID} has been sent to prison for {thief.SentenceInSeconds} seconds!", ConsoleColor.Red);
+        NewsFeed.AddMessageAndWriteQueue($"Thief {thief.ID} has been sent to prison for {thief.SentenceInSeconds} seconds!", ConsoleColor.Red);
         // TODO: Now this thief must be removed from the list of persons in the City and added to the list of persons prison.
     }
 
@@ -192,6 +192,6 @@ class Police : Person
 
     internal void Greet(Civilian civilian)
     {
-        _newsFeed.AddMessageAndWriteQueue($"Police {ID} interacted with Civilian {civilian.ID}.", ConsoleColor.Red);
+        NewsFeed.AddMessageAndWriteQueue($"Police {ID} interacted with Civilian {civilian.ID}.", ConsoleColor.Red);
     }
 }

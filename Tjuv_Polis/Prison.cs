@@ -119,7 +119,7 @@ public class Prison
                 thief.VerticalSpace = CityNextToPrison.VerticalWallLength;
 
                 thief.IsArrested = false;
-
+                thief.NewsFeed.AddMessageAndWriteQueue($"Thief {thief.ID} is released from prison.", ConsoleColor.Green);
                 prisonersToRelease.Add(prisoner);
             }
         }
