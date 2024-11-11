@@ -1,7 +1,8 @@
 ﻿namespace Tjuv_Polis;
 
-public class Person 
+public class Person : IComparable
 {
+
     public int ID { get; set; }
     public int XPosition { get; set; }
     public int YPosition { get; set; }
@@ -39,6 +40,45 @@ public class Person
             : "";
         return $"{GetType().Name} {ID}: \t ({XPosition}, {YPosition}) \t {inventoryStatus}";
     }
+
+    public int CompareTo(object? obj)
+    {
+        if (obj == null) return 1;
+
+        if (obj is Person otherPerson)
+        {
+            // First compare by type
+            Type thisType = this.GetType();
+            Type otherType = otherPerson.GetType();
+
+            // Assign priority values (Civilian = 3, Thief = 2, Police = 1)
+            int thisTypePriority = GetTypePriority(thisType);
+            int otherTypePriority = GetTypePriority(otherType);
+
+            // If types are different, return their priority difference
+            if (thisTypePriority != otherTypePriority)
+            {
+                return thisTypePriority.CompareTo(otherTypePriority);
+            }
+
+            // If types are same, compare by ID
+            return this.ID.CompareTo(otherPerson.ID);
+        }
+
+        throw new ArgumentException("Object is not a Person");
+    }
+
+    private int GetTypePriority(Type type)
+    {
+        return type.Name switch
+        {
+            nameof(Civilian) => 1,
+            nameof(Thief) => 2,
+            nameof(Police) => 3,
+            _ => 0
+        };
+    }
+
 }
 
 class Civilian : Person
@@ -59,8 +99,8 @@ class Thief : Person
 {
     public List<Item> StolenItems { get; set; } = new List<Item>();
     public bool IsArrested { get; set; }
-    public DateTime ? SentenceStart { get; set; }
-    public DateTime ? SentenceEnd { get; set; }
+    public DateTime? SentenceStart { get; set; }
+    public DateTime? SentenceEnd { get; set; }
 
     public Thief(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
