@@ -23,6 +23,8 @@ public class Program
 
         City city = new City(horizontalCitySize, verticalCitySize, personsInCity);
         Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, city);
+        PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
+        PoliceStation policeStation = new PoliceStation(horizontalPrisonSize, verticalPrisonSize);
         StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         city.PrisonNextToCity = prison;
@@ -30,10 +32,11 @@ public class Program
 
         city.DrawCity();
         prison.DrawPrison();
-
-        PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
-
         poorhouse.DrawPoorHouse(city, prison);
+        policeStation.DrawPoliceStation(city, prison, poorhouse);
+        
+
+
 
         bool isPaused = false;
         bool isProgramRunning = true;
