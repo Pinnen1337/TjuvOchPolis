@@ -7,7 +7,8 @@ public class City
     public int VerticalWallLength { get; set; }
     public List<Person> PersonsInCity { get; set; }
     public Prison PrisonNextToCity { get; set; }
-    
+    public PoorHouse PoorHouseNextToCity { get; set; }
+
 
     public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
     {
@@ -120,10 +121,10 @@ public class City
                             //}
 
                         }
-                        //else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
-                        //{
-                        //    currentpolice.Greet(civilian);
-                        //}
+                        else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
+                        {
+                            currentpolice.Greet(civilian);
+                        }
                     }
                 }
             }
@@ -151,6 +152,29 @@ public class City
         foreach (Thief thief in prisonTransport)
         {
             PersonsInCity.Remove(thief);
+        }
+    }
+    internal void MoveCivilianToPoorHouse()
+    {
+        List<Person> poorTransport = new List<Person>();
+        foreach (Person thisPerson in PersonsInCity)
+        {
+            if (thisPerson is Civilian civilian && civilian.IsPoor == true)
+            {
+                // Justera fattigmans position och utrymme för fattigstugan
+                civilian.XPosition = Random.Shared.Next(PoorHouseNextToCity.StartDrawPoorHouseXAt + 2, PoorHouseNextToCity.StartDrawPoorHouseXAt + PoorHouseNextToCity.HorisontalWallLength);
+                civilian.YPosition = Random.Shared.Next(2, 2 + PoorHouseNextToCity.VerticalWallLength); // Sätt en startposition inom poor house
+                civilian.HorizontalSpace = PoorHouseNextToCity.HorisontalWallLength;
+                civilian.VerticalSpace = PoorHouseNextToCity.VerticalWallLength;
+                civilian.PovertyStart = DateTime.Now;
+                civilian.PovertyEnd = DateTime.Now.AddSeconds(15);
+                poorTransport.Add(thisPerson);
+            }
+        }
+        PoorHouseNextToCity.PersonsInPoorHouse.AddRange(poorTransport);
+        foreach (Civilian civilian in poorTransport)
+        {
+            PersonsInCity.Remove(civilian);
         }
     }
 }
