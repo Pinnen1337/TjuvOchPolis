@@ -49,6 +49,7 @@ public class Program
 
         while (isProgramRunning)
         {
+            
             // Kolla om mellanslag har tryckts för att starta/pausa simuleringen
             if (Console.KeyAvailable)
             {
@@ -71,9 +72,12 @@ public class Program
                 statuslist.Write();
                 city.CheckCollision();
                 city.MoveArrestedToPrison();
-                city.MoveCivilianToPoorHouse();  
+                city.MoveCivilianToPoorHouse();
+                city.MovePoliceToPoliceStation();
                 prison.ReleasePrisoners();
                 poorHouse.ReleaseCivilan();
+                policeStation.ReleasePolice();
+                person.Deposit();
             }
 
             Thread.Sleep(100);

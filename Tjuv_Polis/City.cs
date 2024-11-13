@@ -7,6 +7,7 @@ public class City
     public List<Person> PersonsInCity { get; set; }
     public Prison PrisonNextToCity { get; set; }
     public PoorHouse PoorHouseNextToCity { get; set; }
+    public PoliceStation PoliceStationNextToCity { get; set; }
 
 
     public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
@@ -174,6 +175,29 @@ public class City
         foreach (Civilian civilian in poorTransport)
         {
             PersonsInCity.Remove(civilian);
+        }
+    }
+    internal void MovePoliceToPoliceStation()
+    {
+        List<Person> policeTransport = new List<Person>();
+        foreach (Person thisPerson in PersonsInCity)
+        {
+            if (thisPerson is Police police && police.IsFull == true)
+            {
+                // Justera polis position och utrymme för policestation
+                police.XPosition = Random.Shared.Next(PoliceStationNextToCity.StartDrawPoliceStationXAt + 2, PoliceStationNextToCity.StartDrawPoliceStationXAt + PoliceStationNextToCity.HorisontalWallLength);
+                police.YPosition = Random.Shared.Next(7 + PoorHouseNextToCity.VerticalWallLength + PoliceStationNextToCity.VerticalWallLength, 6 + PrisonNextToCity.VerticalWallLength + PoorHouseNextToCity.VerticalWallLength + PoliceStationNextToCity); // Sätt en startposition inom police station
+                police.HorizontalSpace = PoliceStationNextToCity.HorisontalWallLength;
+                police.VerticalSpace = PoliceStationNextToCity.VerticalWallLength;
+                police.DepositStart = DateTime.Now;
+                police.DepositEnd = DateTime.Now.AddSeconds(5);
+                policeTransport.Add(thisPerson);
+            }
+        }
+        PoliceStationNextToCity.PersonsInPoliceStation.AddRange(policeTransport);
+        foreach (Police police in policeTransport)
+        {
+            PersonsInCity.Remove(police);
         }
     }
 }

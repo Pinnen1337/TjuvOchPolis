@@ -14,6 +14,8 @@ public class Person : IComparable
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
     public NewsFeed NewsFeed { get; set; }
+   
+
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
     {
@@ -167,6 +169,7 @@ class Thief : Person
 
 class Police : Person
 {
+    public bool IsFull { get; set; }
     List<Item> ConfiscatedItems { get; set; } = new List<Item>();
     public Police(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
@@ -218,6 +221,15 @@ class Police : Person
         {
             civilian.IsPoor = true;
             NewsFeed.AddMessageAndWriteQueue($"Civilian {civilian.ID} has been sent to Poor House for 15 seconds!", ConsoleColor.Magenta);
+        }
+    }
+    public void Deposit(Police police)
+    {
+        if (police.ConfiscatedItems.Count > 8)
+        {
+            police.IsFull = true;
+
+            NewsFeed.AddMessageAndWriteQueue($"Police {police.ID} has moved to the police station for 5 seconds!", ConsoleColor.Blue);
         }
     }
 }
