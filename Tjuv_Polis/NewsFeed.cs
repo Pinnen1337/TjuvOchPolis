@@ -1,5 +1,4 @@
-﻿
-namespace Tjuv_Polis;
+﻿namespace Tjuv_Polis;
 public class NewsFeed
 {
     public Queue<Message> NewsQueue { get; }

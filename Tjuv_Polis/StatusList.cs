@@ -1,6 +1,4 @@
-﻿
-
-namespace Tjuv_Polis
+﻿namespace Tjuv_Polis
 {
     internal class StatusList
     {
