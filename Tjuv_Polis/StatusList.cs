@@ -7,12 +7,14 @@
         private readonly int _startDrawAtY;
         private List<Person> _personsInPrison;
         private List<Person> _personsInPoorHouse;
+        private List<Person> _personsInPoliceStation;
 
-        public StatusList(List<Person> personsInCity, List<Person> personsInPrison, List<Person> personsInPoorHouse, int positionX, int positionY)
+        public StatusList(List<Person> personsInCity, List<Person> personsInPrison, List<Person> personsInPoorHouse, List<Person> personsInPoliceStation, int positionX, int positionY)
         {
             _persons = personsInCity;
             _personsInPrison = personsInPrison;
             _personsInPoorHouse = personsInPoorHouse;
+            _personsInPoliceStation = personsInPoliceStation;
             _startDrawAtX = positionX;
             _startDrawAtY = positionY;
         }
@@ -23,7 +25,7 @@
             Type previousType = _persons[0].GetType();
 
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY);
-            Console.Write(new string($"{"STATUS:",7}\tCIVILIANS: {NumberOfCiviliansInCity(),2:D}\t    POLICE:{NumberOfPoliceInCity(),2:D}\t   THIEFS: {NumberOfThiefsInCity(),2:D}\t   PRISONERS:{_personsInPrison.Count,2:D}\t    POVERTY:{_personsInPoorHouse.Count,2:D}"));
+            Console.Write(new string($"{"STATUS:",7} CIVILIANS: {NumberOfCiviliansInCity(),2:D}\t  POLICE:{NumberOfPoliceInCity(),2:D}\t THIEFS: {NumberOfThiefsInCity(),2:D}\t PRISONERS:{_personsInPrison.Count,2:D}\t   POVERTY:{_personsInPoorHouse.Count,2:D}\t  STATION{_personsInPoliceStation.Count, 2:D}"));
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + 1);
             Console.Write(new string('=', 100));
 
@@ -32,7 +34,7 @@
             //    Välj rätt lista baserat på värdet av `i`
             //    var currentList = (i == 1) ? _persons : _personsInPrison; // 0 standard
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++) // 3 nu 4
             {
                 List<Person> currentList;
 
@@ -47,6 +49,9 @@
                         break;
                     case 2:
                         currentList = _personsInPoorHouse;
+                        break;
+                    case 3:
+                        currentList = _personsInPoliceStation;
                         break;
                     default:
                         currentList = null;
@@ -74,6 +79,10 @@
                 Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
                 Console.Write(new string(' ', 120)); // Rensa raden
                 Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 2);
+
+                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3); // nytt todo test
+                Console.Write(new string(' ', 120)); // Rensa raden
+                Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 3);
             }
         }
         private int NumberOfCiviliansInCity()

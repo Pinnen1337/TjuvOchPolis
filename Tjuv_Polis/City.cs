@@ -112,8 +112,9 @@ public class City
                         {
                             if (currentthief.StolenItems.Count > 0)
                             {
-                            police.ConfiscateAllItems(currentthief);
-                            police.Arrest(currentthief);
+                                police.ConfiscateAllItems(currentthief);
+                                police.Arrest(currentthief);
+                                police.Deposit(police);
                             }
                             //else // Todo. Kolla om det går att få ut ett meddelande om Polis och Tjuv möts när tjuven inte har tagit något.
                             //{
@@ -186,11 +187,11 @@ public class City
             {
                 // Justera polis position och utrymme för policestation
                 police.XPosition = Random.Shared.Next(PoliceStationNextToCity.StartDrawPoliceStationXAt + 2, PoliceStationNextToCity.StartDrawPoliceStationXAt + PoliceStationNextToCity.HorisontalWallLength);
-                police.YPosition = Random.Shared.Next(7 + PoorHouseNextToCity.VerticalWallLength + PoliceStationNextToCity.VerticalWallLength, 6 + PrisonNextToCity.VerticalWallLength + PoorHouseNextToCity.VerticalWallLength + PoliceStationNextToCity); // Sätt en startposition inom police station
+                police.YPosition = Random.Shared.Next(8 + PrisonNextToCity.VerticalWallLength + PoorHouseNextToCity.VerticalWallLength, 7 + PrisonNextToCity.VerticalWallLength + PoorHouseNextToCity.VerticalWallLength + PoliceStationNextToCity.VerticalWallLength); // Sätt en startposition inom police station
                 police.HorizontalSpace = PoliceStationNextToCity.HorisontalWallLength;
                 police.VerticalSpace = PoliceStationNextToCity.VerticalWallLength;
                 police.DepositStart = DateTime.Now;
-                police.DepositEnd = DateTime.Now.AddSeconds(5);
+                police.DepositEnd = DateTime.Now.AddSeconds(15); // 5
                 policeTransport.Add(thisPerson);
             }
         }

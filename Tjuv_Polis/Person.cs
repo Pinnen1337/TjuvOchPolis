@@ -170,6 +170,9 @@ class Thief : Person
 class Police : Person
 {
     public bool IsFull { get; set; }
+    public DateTime? DepositStart { get; set; }
+    public DateTime? DepositEnd { get; set; }
+
     List<Item> ConfiscatedItems { get; set; } = new List<Item>();
     public Police(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
@@ -229,7 +232,15 @@ class Police : Person
         {
             police.IsFull = true;
 
-            NewsFeed.AddMessageAndWriteQueue($"Police {police.ID} has moved to the police station for 5 seconds!", ConsoleColor.Blue);
+            NewsFeed.AddMessageAndWriteQueue($"Police {police.ID} has returned to the police station for 5 seconds!", ConsoleColor.Blue);
         }
+    }
+    public bool DoneTheTime()
+    {
+        if (DateTime.Now > this.DepositEnd)
+        {
+            return true;
+        }
+        return false;
     }
 }

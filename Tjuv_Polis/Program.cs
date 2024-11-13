@@ -28,13 +28,15 @@ public class Program
         City city = new City(horizontalCitySize, verticalCitySize, personsInCity);
         Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, city);
         PoorHouse poorHouse = new PoorHouse(horizontalPoorHouseSize, verticalPoorHouseSize, city, prison);
-        PoliceStation policeStation = new PoliceStation(horizontalPoliceStationSize, verticalPoliceStationSize);
-        StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, poorHouse.PersonsInPoorHouse, horizontalCitySize + horizontalPrisonSize + 4, 0);
+        PoliceStation policeStation = new PoliceStation(horizontalPoliceStationSize, verticalPoliceStationSize, city, prison, poorHouse);
+        StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, poorHouse.PersonsInPoorHouse, policeStation.PersonsInPoliceStation, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         city.PrisonNextToCity = prison;
         prison.CityNextToPrison = city;
         city.PoorHouseNextToCity = poorHouse;
         poorHouse.CityNextToPoorHouse = city;
+        city.PoliceStationNextToCity = policeStation;
+        policeStation.CityNextToPoliceStation = city;
 
         city.DrawCity();
         prison.DrawPrison();
@@ -69,6 +71,7 @@ public class Program
                 city.Move();
                 prison.Move();
                 poorHouse.Move();
+                policeStation.Move();
                 statuslist.Write();
                 city.CheckCollision();
                 city.MoveArrestedToPrison();
@@ -77,7 +80,6 @@ public class Program
                 prison.ReleasePrisoners();
                 poorHouse.ReleaseCivilan();
                 policeStation.ReleasePolice();
-                person.Deposit();
             }
 
             Thread.Sleep(100);
