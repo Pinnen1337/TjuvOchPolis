@@ -3,10 +3,10 @@ namespace Tjuv_Polis;
 
 public class City
 {
-    public int HorisontalWallLength { get; init; }
-    public int VerticalWallLength { get; init; }
-    public List<Person> PersonsInCity { get; init; }
-    public Prison ? PrisonNextToCity { get; set; }
+    public int HorisontalWallLength { get; set; }
+    public int VerticalWallLength { get; set; }
+    public List<Person> PersonsInCity { get; set; }
+    public Prison PrisonNextToCity { get; set; }
     
 
     public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
@@ -34,7 +34,7 @@ public class City
             {
                 newYPosition = person.VerticalSpace - 1;
             }
-            if (newYPosition >= person.VerticalSpace)
+            if (newYPosition >= person.VerticalSpace + 1)
             {
                 newYPosition = 2;
             }
@@ -120,10 +120,10 @@ public class City
                             //}
 
                         }
-                        //else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
-                        //{
-                        //    currentpolice.Greet(civilian);
-                        //}
+                        else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
+                        {
+                            currentpolice.Greet(civilian);
+                        }
                     }
                 }
             }
@@ -138,7 +138,7 @@ public class City
             if (thisPerson is Thief thief && thief.IsArrested == true)
             {
                 // Justera tjuvens position och utrymme för fängelset
-                thief.XPosition =  Random.Shared.Next(PrisonNextToCity.StartDrawPrisonAt + 2, PrisonNextToCity.StartDrawPrisonAt + PrisonNextToCity.HorisontalWallLength);
+                thief.XPosition = Random.Shared.Next(PrisonNextToCity.StartDrawPrisonAt + 2, PrisonNextToCity.StartDrawPrisonAt + PrisonNextToCity.HorisontalWallLength);
                 thief.YPosition = Random.Shared.Next(2, 2 + PrisonNextToCity.VerticalWallLength); // Sätt en startposition inom fängelset
                 thief.HorizontalSpace = PrisonNextToCity.HorisontalWallLength;
                 thief.VerticalSpace = PrisonNextToCity.VerticalWallLength;
@@ -151,6 +151,29 @@ public class City
         foreach (Thief thief in prisonTransport)
         {
             PersonsInCity.Remove(thief);
+        }
+    }
+    internal void MoveCivilianToPoorHouse()
+    {
+        List<Person> poorTransport = new List<Person>();
+        foreach (Person thisPerson in PersonsInCity)
+        {
+            if (thisPerson is Civilian civilian && civilian.IsPoor == true)
+            {
+                // Justera fattigmans position och utrymme för fattigstugan
+                civilian.XPosition = Random.Shared.Next(PoorHouseNextToCity.StartDrawPoorHouseXAt + 2, PoorHouseNextToCity.StartDrawPoorHouseXAt + PoorHouseNextToCity.HorisontalWallLength);
+                civilian.YPosition = Random.Shared.Next(5 + PrisonNextToCity.VerticalWallLength, 4 + PrisonNextToCity.VerticalWallLength + PoorHouseNextToCity.VerticalWallLength); // Sätt en startposition inom poor house
+                civilian.HorizontalSpace = PoorHouseNextToCity.HorisontalWallLength;
+                civilian.VerticalSpace = PoorHouseNextToCity.VerticalWallLength;
+                civilian.PovertyStart = DateTime.Now;
+                civilian.PovertyEnd = DateTime.Now.AddSeconds(15);
+                poorTransport.Add(thisPerson);
+            }
+        }
+        PoorHouseNextToCity.PersonsInPoorHouse.AddRange(poorTransport);
+        foreach (Civilian civilian in poorTransport)
+        {
+            PersonsInCity.Remove(civilian);
         }
     }
 }

@@ -21,7 +21,6 @@ public class Prison
     
 
     }
-    // TODO we need a method that adds a person to the PersonsInPrison list and also sets the correct positions and most importantly the correct Space properties.
     public void Move()
     {
         foreach (Person person in PersonsInPrison)
@@ -44,7 +43,7 @@ public class Prison
             {
                 newYPosition = 2;
             }
-            if (newXPosition >= StartDrawPrisonAt + person.HorizontalSpace - 1)
+            if (newXPosition >= StartDrawPrisonAt + person.HorizontalSpace)
             {
                 newXPosition = StartDrawPrisonAt + 2;
             }

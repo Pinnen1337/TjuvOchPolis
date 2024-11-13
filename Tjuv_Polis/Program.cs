@@ -6,7 +6,7 @@ public class Program
     {
         Console.CursorVisible = false;
 
-        int numberOfEachType = 10;
+        //int numberOfEachType = 10;
         int numberOfCivilians = 15;
         int numberOfThiefs = 10;
         int numberOfPolice = 5;
@@ -14,6 +14,10 @@ public class Program
         int verticalCitySize = 25;
         int horizontalPrisonSize = 25;
         int verticalPrisonSize = 10;
+        int horizontalPoorHouseSize = 25;
+        int verticalPoorHouseSize = 10;
+        int horizontalPoliceStationSize = 25;
+        int verticalPoliceStationSize = 10;
 
         Console.Clear();
 
@@ -23,17 +27,22 @@ public class Program
 
         City city = new City(horizontalCitySize, verticalCitySize, personsInCity);
         Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, city);
-        StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, horizontalCitySize + horizontalPrisonSize + 4, 0);
+        PoorHouse poorHouse = new PoorHouse(horizontalPoorHouseSize, verticalPoorHouseSize, city, prison);
+        PoliceStation policeStation = new PoliceStation(horizontalPoliceStationSize, verticalPoliceStationSize);
+        StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, poorHouse.PersonsInPoorHouse, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         city.PrisonNextToCity = prison;
         prison.CityNextToPrison = city;
+        city.PoorHouseNextToCity = poorHouse;
+        poorHouse.CityNextToPoorHouse = city;
 
         city.DrawCity();
         prison.DrawPrison();
+        poorHouse.DrawPoorHouse(city, prison);
+        policeStation.DrawPoliceStation(city, prison, poorHouse);
+        
 
-        PoorHouse poorhouse = new PoorHouse(horizontalPrisonSize, verticalPrisonSize);
 
-        poorhouse.DrawPoorHouse(city, prison);
 
         bool isPaused = false;
         bool isProgramRunning = true;
@@ -58,10 +67,13 @@ public class Program
             {
                 city.Move();
                 prison.Move();
+                poorHouse.Move();
                 statuslist.Write();
                 city.CheckCollision();
                 city.MoveArrestedToPrison();
+                city.MoveCivilianToPoorHouse();  
                 prison.ReleasePrisoners();
+                poorHouse.ReleaseCivilan();
             }
 
             Thread.Sleep(100);

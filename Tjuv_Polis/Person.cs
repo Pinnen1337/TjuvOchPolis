@@ -13,7 +13,7 @@ public class Person : IComparable
     public char Symbol { get; protected set; }
     public ConsoleColor Color { get; protected set; }
     public Inventory PersonalInventory { get; set; }
-    public NewsFeed NewsFeed { get;  set; }
+    public NewsFeed NewsFeed { get; set; }
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
     {
@@ -83,16 +83,37 @@ public class Person : IComparable
 
 class Civilian : Person
 {
+    public bool IsPoor { get; set; }
+    public DateTime? PovertyStart { get; set; }
+    public DateTime? PovertyEnd { get; set; }
+
     public Civilian(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
         Symbol = 'C';
         Color = ConsoleColor.Green;
+        IsPoor = false;
 
         PersonalInventory.Items.Add(new Wallet());
         PersonalInventory.Items.Add(new Watch());
         PersonalInventory.Items.Add(new Phone());
         PersonalInventory.Items.Add(new Keys());
     }
+    public override string Status()
+    {
+        string ItemsStatus = PersonalInventory.Items.Count == 0
+            ? string.Join(" ", PersonalInventory.Items.Select(item => "[" + item.KindOfItem + "]"))
+            : "";
+        return $"{base.Status()}{(IsPoor ? "[In PoorHouse]" : "")}{ItemsStatus}";
+    }
+    public bool DoneTheTime()
+    {
+        if (DateTime.Now > this.PovertyEnd)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 class Thief : Person
@@ -172,6 +193,7 @@ class Police : Person
 
             NewsFeed.AddMessageAndWriteQueue($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.", ConsoleColor.Green);
         }
+        
     }
 
     public void Arrest(Thief thief)
@@ -190,8 +212,12 @@ class Police : Person
         return $"{base.Status()}{confiscatedItemsStatus}";
     }
 
-    internal void Greet(Civilian civilian)
+    public void Greet(Civilian civilian)
     {
-        NewsFeed.AddMessageAndWriteQueue($"Police {ID} interacted with Civilian {civilian.ID}.", ConsoleColor.Red);
+        if (civilian.PersonalInventory.Items.Count == 0)
+        {
+            civilian.IsPoor = true;
+            NewsFeed.AddMessageAndWriteQueue($"Civilian {civilian.ID} has been sent to Poor House for 15 seconds!", ConsoleColor.Magenta);
+        }
     }
 }
