@@ -35,7 +35,7 @@ public class City
             {
                 newYPosition = person.VerticalSpace - 1;
             }
-            if (newYPosition >= person.VerticalSpace)
+            if (newYPosition >= person.VerticalSpace + 1)
             {
                 newYPosition = 2;
             }
@@ -139,7 +139,7 @@ public class City
             if (thisPerson is Thief thief && thief.IsArrested == true)
             {
                 // Justera tjuvens position och utrymme för fängelset
-                thief.XPosition =  Random.Shared.Next(PrisonNextToCity.StartDrawPrisonAt + 2, PrisonNextToCity.StartDrawPrisonAt + PrisonNextToCity.HorisontalWallLength);
+                thief.XPosition = Random.Shared.Next(PrisonNextToCity.StartDrawPrisonAt + 2, PrisonNextToCity.StartDrawPrisonAt + PrisonNextToCity.HorisontalWallLength);
                 thief.YPosition = Random.Shared.Next(2, 2 + PrisonNextToCity.VerticalWallLength); // Sätt en startposition inom fängelset
                 thief.HorizontalSpace = PrisonNextToCity.HorisontalWallLength;
                 thief.VerticalSpace = PrisonNextToCity.VerticalWallLength;
@@ -163,7 +163,7 @@ public class City
             {
                 // Justera fattigmans position och utrymme för fattigstugan
                 civilian.XPosition = Random.Shared.Next(PoorHouseNextToCity.StartDrawPoorHouseXAt + 2, PoorHouseNextToCity.StartDrawPoorHouseXAt + PoorHouseNextToCity.HorisontalWallLength);
-                civilian.YPosition = Random.Shared.Next(2, 2 + PoorHouseNextToCity.VerticalWallLength); // Sätt en startposition inom poor house
+                civilian.YPosition = Random.Shared.Next(5 + PrisonNextToCity.VerticalWallLength, 4 + PrisonNextToCity.VerticalWallLength + PoorHouseNextToCity.VerticalWallLength); // Sätt en startposition inom poor house
                 civilian.HorizontalSpace = PoorHouseNextToCity.HorisontalWallLength;
                 civilian.VerticalSpace = PoorHouseNextToCity.VerticalWallLength;
                 civilian.PovertyStart = DateTime.Now;

@@ -44,7 +44,7 @@ public class Prison
             {
                 newYPosition = 2;
             }
-            if (newXPosition >= StartDrawPrisonAt + person.HorizontalSpace - 1)
+            if (newXPosition >= StartDrawPrisonAt + person.HorizontalSpace)
             {
                 newXPosition = StartDrawPrisonAt + 2;
             }

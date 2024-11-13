@@ -33,9 +33,9 @@ public class PoorHouse
                 newXPosition = StartDrawPoorHouseXAt + person.HorizontalSpace - 2;
             }
 
-            if (newYPosition < StartDrawPoorHouseYAt + 5) //
+            if (newYPosition < StartDrawPoorHouseYAt + 5)
             {
-                newYPosition = person.VerticalSpace + StartDrawPoorHouseYAt + 5;
+                newYPosition = person.VerticalSpace + StartDrawPoorHouseYAt + 4;
             }
 
             if (newYPosition >= person.VerticalSpace + StartDrawPoorHouseYAt + 5)
@@ -43,7 +43,7 @@ public class PoorHouse
                 newYPosition = StartDrawPoorHouseYAt + 5;
             }
 
-            if (newXPosition >= StartDrawPoorHouseXAt + person.HorizontalSpace - 1)
+            if (newXPosition >= StartDrawPoorHouseXAt + person.HorizontalSpace)
             {
                 newXPosition = StartDrawPoorHouseXAt + 2;
             }

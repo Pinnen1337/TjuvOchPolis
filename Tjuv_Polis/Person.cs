@@ -193,6 +193,7 @@ class Police : Person
 
             NewsFeed.AddMessageAndWriteQueue($"Police {ID} confiscated {stolenItemsAsString} from Thief {thief.ID}.", ConsoleColor.Green);
         }
+        
     }
 
     public void Arrest(Thief thief)
