@@ -7,7 +7,8 @@ public class City
     public int VerticalWallLength { get; set; }
     public List<Person> PersonsInCity { get; set; }
     public Prison PrisonNextToCity { get; set; }
-    
+    public PoorHouse PoorHouseNextToCity { get; set; }
+
 
     public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
     {
