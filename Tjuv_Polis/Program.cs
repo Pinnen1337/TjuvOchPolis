@@ -41,16 +41,12 @@ public class Program
         prison.DrawPrison();
         poorHouse.DrawPoorHouse(city, prison);
         policeStation.DrawPoliceStation(city, prison, poorHouse);
-        
-
-
 
         bool isPaused = false;
         bool isProgramRunning = true;
 
         while (isProgramRunning)
-        {
-            
+        { 
             // Kolla om mellanslag har tryckts för att starta/pausa simuleringen
             if (Console.KeyAvailable)
             {
@@ -80,7 +76,6 @@ public class Program
                 poorHouse.ReleaseCivilan();
                 policeStation.ReleasePolice();
             }
-
             Thread.Sleep(100);
         }
     }

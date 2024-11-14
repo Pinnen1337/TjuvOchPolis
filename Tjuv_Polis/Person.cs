@@ -39,7 +39,7 @@ public class Person : IComparable
         return $"{GetType().Name} {ID}: \t ({XPosition}, {YPosition}) \t {inventoryStatus}";
     }
 
-    public int CompareTo(object? obj)
+    public int CompareTo(object? obj) // Ordnar listan i ordning på type sen id.
     {
         if (obj == null) return 1;
 
@@ -49,7 +49,7 @@ public class Person : IComparable
             Type thisType = this.GetType();
             Type otherType = otherPerson.GetType();
 
-            // Assign priority values (Civilian = 3, Thief = 2, Police = 1)
+            // Assign priority values (Civilian = 1, Thief = 2, Police = 3)
             int thisTypePriority = GetTypePriority(thisType);
             int otherTypePriority = GetTypePriority(otherType);
 
@@ -178,6 +178,7 @@ class Thief : Person
             : "";
         return $"{base.Status()}{(IsArrested ? "[In Prison]" : "")}{stolenItemsStatus}";
     }
+
     public bool DoneTheTime()
     {
         if (DateTime.Now > this.SentenceEnd)
