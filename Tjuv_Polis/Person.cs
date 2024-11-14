@@ -2,7 +2,6 @@
 
 public class Person : IComparable
 {
-
     public int ID { get; set; }
     public int XPosition { get; set; }
     public int YPosition { get; set; }
@@ -14,7 +13,7 @@ public class Person : IComparable
     public ConsoleColor Color { get; set; }
     public Inventory PersonalInventory { get; set; }
     public NewsFeed NewsFeed { get; set; }
-   
+    public static List<Item> ProvideAidItems { get; set; } = new List<Item>();
 
 
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
@@ -33,6 +32,8 @@ public class Person : IComparable
         this.NewsFeed = newsFeed;
 
     }
+
+
 
     public virtual string Status()
     {
@@ -111,11 +112,38 @@ class Civilian : Person
     {
         if (DateTime.Now > this.PovertyEnd)
         {
+            List<Type> requiredItems = new List<Type>();
+
+            requiredItems.Add(typeof(Wallet));
+            requiredItems.Add(typeof(Watch));
+            requiredItems.Add(typeof(Phone));
+            requiredItems.Add(typeof(Keys));
+
+            // Skapa en lista för de föremål som verkligen kan tilldelas
+            List<string> itemsGiven = new List<string>();
+
+            foreach (Type itemType in requiredItems)
+            {
+                Item item = ProvideAidItems.FirstOrDefault(i => i.GetType() == itemType);
+
+                if (item != null)
+                {
+                    PersonalInventory.Items.Add(item);
+                    ProvideAidItems.Remove(item);
+
+                    itemsGiven.Add(item.KindOfItem);
+                }
+            }
+
+            if (itemsGiven.Count > 0)
+            {
+                string itemsList = string.Join(", ", itemsGiven);
+                NewsFeed.AddMessageAndWriteQueue($"Civilian {ID} received {itemsList} upon leaving PoorHouse.", ConsoleColor.Cyan);
+            }
             return true;
         }
         return false;
     }
-
 }
 
 class Thief : Person
@@ -137,9 +165,8 @@ class Thief : Person
 
     public void Steal(Civilian civilian)
     {
-        if (!IsArrested && civilian.PersonalInventory.Items.Count > 0)
+        if (!IsArrested && StolenItems.Count < 8 && civilian.PersonalInventory.Items.Count > 0)
         {
-
             int randomIndex = Random.Shared.Next(civilian.PersonalInventory.Items.Count);
             Item itemToSteal = civilian.PersonalInventory.Items[randomIndex];
             StolenItems.Add(itemToSteal);
@@ -174,6 +201,7 @@ class Police : Person
     public DateTime? DepositEnd { get; set; }
 
     List<Item> ConfiscatedItems { get; set; } = new List<Item>();
+    
     public Police(int horizontalSpace, int verticalSpace, int iD, NewsFeed newsFeed) : base(horizontalSpace, verticalSpace, iD, new Inventory(), newsFeed)
     {
         Symbol = 'P';
@@ -215,10 +243,10 @@ class Police : Person
         string confiscatedItemsStatus = ConfiscatedItems.Count > 0
             ? string.Join(" ", ConfiscatedItems.Select(item => "[" + item.KindOfItem + "]"))
             : "";
-        return $"{base.Status()}{confiscatedItemsStatus}";
+        return $"{base.Status()}{(IsFull ? "[In Policestation]" : "")}{confiscatedItemsStatus}";
     }
 
-    public void Greet(Civilian civilian)
+    public void ProvideAid(Civilian civilian)
     {
         if (civilian.PersonalInventory.Items.Count == 0)
         {
@@ -226,15 +254,21 @@ class Police : Person
             NewsFeed.AddMessageAndWriteQueue($"Civilian {civilian.ID} has been sent to Poor House for 15 seconds!", ConsoleColor.Magenta);
         }
     }
-    public void Deposit(Police police)
+    public void Deposit()
     {
-        if (police.ConfiscatedItems.Count > 8)
+        if (ConfiscatedItems.Count > 8)
         {
-            police.IsFull = true;
+            IsFull = true;
+            foreach (Item item in ConfiscatedItems.ToList())
+            {
+                ProvideAidItems.Add(item);
+            }
+            ConfiscatedItems.Clear();
 
-            NewsFeed.AddMessageAndWriteQueue($"Police {police.ID} has returned to the police station for 5 seconds!", ConsoleColor.Blue);
+            NewsFeed.AddMessageAndWriteQueue($"Police {ID} has gone to the police station for 10 seconds!", ConsoleColor.Blue);
         }
     }
+
     public bool DoneTheTime()
     {
         if (DateTime.Now > this.DepositEnd)

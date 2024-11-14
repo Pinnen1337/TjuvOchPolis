@@ -6,7 +6,6 @@ public class Program
     {
         Console.CursorVisible = false;
 
-        //int numberOfEachType = 10;
         int numberOfCivilians = 15;
         int numberOfThiefs = 10;
         int numberOfPolice = 5;
@@ -21,7 +20,7 @@ public class Program
 
         Console.Clear();
 
-        NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 5);
+        NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 10);
 
         List<Person> personsInCity = PersonFactory.Create(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
 

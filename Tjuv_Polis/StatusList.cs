@@ -58,7 +58,7 @@
                         break;
                 }
 
-                foreach (var person in currentList)
+                foreach (Person person in currentList)
                 {
                     Type currentType = person.GetType();
 
@@ -76,14 +76,36 @@
                     Console.WriteLine(person.Status());
                     rowOffset++;
                 }
+
                 Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 2);
                 Console.Write(new string(' ', 120)); // Rensa raden
                 Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 2);
 
-                Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3); // nytt todo test
-                Console.Write(new string(' ', 120)); // Rensa raden
-                Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 3);
             }
+
+
+            // Gruppera objekten efter typ och räknar antalet av varje typ
+            var groupedItems = Person.ProvideAidItems
+                .GroupBy(item => item.KindOfItem)
+                .Select(group => new { Item = group.Key, Count = group.Count() })
+                .ToList();
+
+            // Skapa en sträng där varje item skrivs ut med antalet före eller efter
+            string itemsWithCount = string.Join("", groupedItems.Select(group => $"[{group.Count}[{group.Item}] "));
+
+            Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
+            Console.WriteLine(new string(' ', 100));
+        
+            rowOffset++; // Flytta ner en rad för nästa rad
+
+            // Skriv ut resultatet på samma rad
+            Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
+            Console.WriteLine("Items in Police Station:\t " + itemsWithCount);
+
+            Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 4); // nytt todo test
+            Console.Write(new string(' ', 120)); // Rensa raden
+            Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 4);
+
         }
         private int NumberOfCiviliansInCity()
         {

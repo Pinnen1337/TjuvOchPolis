@@ -114,7 +114,7 @@ public class City
                             {
                                 police.ConfiscateAllItems(currentthief);
                                 police.Arrest(currentthief);
-                                police.Deposit(police);
+                                police.Deposit();
                             }
                             //else // Todo. Kolla om det går att få ut ett meddelande om Polis och Tjuv möts när tjuven inte har tagit något.
                             //{
@@ -124,7 +124,7 @@ public class City
                         }
                         else if (thisPerson is Police currentpolice && otherPerson is Civilian civilian)
                         {
-                            currentpolice.Greet(civilian);
+                            currentpolice.ProvideAid(civilian);
                         }
                     }
                 }
@@ -191,7 +191,7 @@ public class City
                 police.HorizontalSpace = PoliceStationNextToCity.HorisontalWallLength;
                 police.VerticalSpace = PoliceStationNextToCity.VerticalWallLength;
                 police.DepositStart = DateTime.Now;
-                police.DepositEnd = DateTime.Now.AddSeconds(15); // 5
+                police.DepositEnd = DateTime.Now.AddSeconds(10);
                 policeTransport.Add(thisPerson);
             }
         }
