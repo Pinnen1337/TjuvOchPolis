@@ -94,7 +94,8 @@
 
             Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
             Console.WriteLine(new string(' ', 100));
-        
+            Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 3);
+
             rowOffset++; // Flytta ner en rad för nästa rad
 
             // Skriv ut resultatet på samma rad
