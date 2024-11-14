@@ -119,7 +119,7 @@ namespace Tjuv_Polis
                     police.VerticalSpace = CityNextToPoliceStation.VerticalWallLength;
 
                     police.IsFull = false;
-                    police.NewsFeed.AddMessageAndWriteQueue($"Police {police.ID} has return from policestation.", ConsoleColor.Green);
+                    police.NewsFeed.AddMessageAndWriteQueue($"Police {police.ID} is back on duty in City.", ConsoleColor.Green);
                     policeToRelease.Add(fullPolice);
                 }
             }
