@@ -6,7 +6,6 @@ public class Program
     {
         Console.CursorVisible = false;
 
-        //int numberOfEachType = 10;
         int numberOfCivilians = 15;
         int numberOfThiefs = 10;
         int numberOfPolice = 5;
@@ -21,20 +20,22 @@ public class Program
 
         Console.Clear();
 
-        NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 5);
+        NewsFeed newsFeed = new NewsFeed(0, verticalCitySize + 3, 10);
 
         List<Person> personsInCity = PersonFactory.Create(numberOfCivilians, numberOfThiefs, numberOfPolice, newsFeed, horizontalCitySize, verticalCitySize);
 
         City city = new City(horizontalCitySize, verticalCitySize, personsInCity);
         Prison prison = new Prison(horizontalPrisonSize, verticalPrisonSize, city);
         PoorHouse poorHouse = new PoorHouse(horizontalPoorHouseSize, verticalPoorHouseSize, city, prison);
-        PoliceStation policeStation = new PoliceStation(horizontalPoliceStationSize, verticalPoliceStationSize);
-        StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, poorHouse.PersonsInPoorHouse, horizontalCitySize + horizontalPrisonSize + 4, 0);
+        PoliceStation policeStation = new PoliceStation(horizontalPoliceStationSize, verticalPoliceStationSize, city, prison, poorHouse);
+        StatusList statuslist = new StatusList(personsInCity, prison.PersonsInPrison, poorHouse.PersonsInPoorHouse, policeStation.PersonsInPoliceStation, horizontalCitySize + horizontalPrisonSize + 4, 0);
 
         city.PrisonNextToCity = prison;
         prison.CityNextToPrison = city;
         city.PoorHouseNextToCity = poorHouse;
         poorHouse.CityNextToPoorHouse = city;
+        city.PoliceStationNextToCity = policeStation;
+        policeStation.CityNextToPoliceStation = city;
 
         city.DrawCity();
         prison.DrawPrison();
@@ -49,6 +50,7 @@ public class Program
 
         while (isProgramRunning)
         {
+            
             // Kolla om mellanslag har tryckts för att starta/pausa simuleringen
             if (Console.KeyAvailable)
             {
@@ -68,12 +70,15 @@ public class Program
                 city.Move();
                 prison.Move();
                 poorHouse.Move();
+                policeStation.Move();
                 statuslist.Write();
                 city.CheckCollision();
                 city.MoveArrestedToPrison();
-                city.MoveCivilianToPoorHouse();  
+                city.MoveCivilianToPoorHouse();
+                city.MovePoliceToPoliceStation();
                 prison.ReleasePrisoners();
                 poorHouse.ReleaseCivilan();
+                policeStation.ReleasePolice();
             }
 
             Thread.Sleep(100);
