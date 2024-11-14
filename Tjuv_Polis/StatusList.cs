@@ -106,6 +106,10 @@
             Console.Write(new string(' ', 120)); // Rensa raden
             Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 4);
 
+            Console.SetCursorPosition(_startDrawAtX, _startDrawAtY + rowOffset + 5); // nytt todo test
+            Console.Write(new string(' ', 120)); // Rensa raden
+            Console.SetCursorPosition(0, _startDrawAtY + rowOffset + 5);
+
         }
         private int NumberOfCiviliansInCity()
         {
