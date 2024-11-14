@@ -23,4 +23,3 @@
         return string.Join(", ", Items.Select(item => item.KindOfItem));
     }
 }
-

@@ -9,7 +9,6 @@ public class City
     public PoorHouse PoorHouseNextToCity { get; set; }
     public PoliceStation PoliceStationNextToCity { get; set; }
 
-
     public City(int horisontalSize, int verticalSize, List<Person> personsInCity)
     {
         HorisontalWallLength = horisontalSize;
@@ -52,7 +51,6 @@ public class City
             Console.ForegroundColor = person.Color;
             Console.Write(person.Symbol);
             Console.ResetColor();
-
         }
     }
 

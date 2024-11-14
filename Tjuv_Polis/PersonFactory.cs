@@ -25,6 +25,5 @@ public class PersonFactory
     public static List<Person> Create(int numberOfEachType, NewsFeed newsFeed, int horizontalCitySize, int verticalCitySize)
     {
         return Create(numberOfEachType, numberOfEachType, numberOfEachType, newsFeed, horizontalCitySize, verticalCitySize);
-
     }
 }

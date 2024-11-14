@@ -14,6 +14,7 @@ class Wallet : Item
 {
 	public Wallet() : base("Wallet")
 	{
+
 	}
 }
 

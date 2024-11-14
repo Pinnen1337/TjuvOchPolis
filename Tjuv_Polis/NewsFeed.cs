@@ -6,7 +6,6 @@ public class NewsFeed
     private readonly int _startDrawAtX;
     private readonly int _startDrawAtY;
     private int messageCounter = 1;
-
     public NewsFeed(int positionX, int positionY, int maxCount)
     {
         NewsQueue = new Queue<Message>();

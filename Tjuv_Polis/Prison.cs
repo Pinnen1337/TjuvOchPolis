@@ -7,7 +7,6 @@ public class Prison
     public int VerticalWallLength { get; init; }
     public int StartDrawPrisonAt { get; init; }
     public List<Person> PersonsInPrison { get; set; }
-
     public City CityNextToPrison { get; set; }
 
     public Prison(int horisontalSize, int verticalSize, City city)
@@ -18,8 +17,6 @@ public class Prison
         StartDrawPrisonAt = city.HorisontalWallLength;
         PersonsInPrison = new List<Person>();
         CityNextToPrison = city;
-    
-
     }
     public void Move()
     {
@@ -56,7 +53,6 @@ public class Prison
             Console.ForegroundColor = person.Color;
             Console.Write(person.Symbol);
             Console.ResetColor();
-
         }
     }
 
@@ -66,7 +62,6 @@ public class Prison
         DrawLowerWall();
         DrawWalls();
     }
-
     private void DrawTopWall()
     {
         Console.SetCursorPosition(StartDrawPrisonAt + 1, 0);

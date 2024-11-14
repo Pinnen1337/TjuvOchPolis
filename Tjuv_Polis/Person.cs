@@ -15,7 +15,6 @@ public class Person : IComparable
     public NewsFeed NewsFeed { get; set; }
     public static List<Item> ProvideAidItems { get; set; } = new List<Item>();
 
-
     public Person(int horizontalSpace, int verticalSpace, int iD, Inventory inventory, NewsFeed newsFeed)
     {
         HorizontalSpace = horizontalSpace;
@@ -30,11 +29,7 @@ public class Person : IComparable
         ID = iD;
         PersonalInventory = inventory;
         this.NewsFeed = newsFeed;
-
     }
-
-
-
     public virtual string Status()
     {
         // Kontrollera om inventariet har några föremål
@@ -268,7 +263,6 @@ class Police : Person
             NewsFeed.AddMessageAndWriteQueue($"Police {ID} has gone to the police station for 10 seconds!", ConsoleColor.Blue);
         }
     }
-
     public bool DoneTheTime()
     {
         if (DateTime.Now > this.DepositEnd)

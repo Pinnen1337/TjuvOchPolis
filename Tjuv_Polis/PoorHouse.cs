@@ -17,7 +17,6 @@ public class PoorHouse
         StartDrawPoorHouseXAt = city.HorisontalWallLength;
         StartDrawPoorHouseYAt = prison.VerticalWallLength;
     }
-
     public void Move()
     {
         foreach (Person person in PersonsInPoorHouse)
@@ -85,7 +84,6 @@ public class PoorHouse
             Console.Write("="); //Golv
         }
     }
-
     private void DrawWalls(City city, Prison prison)
     {
         int cursorPositionLeft = city.HorisontalWallLength + 1;

@@ -83,7 +83,6 @@
 
             }
 
-
             // Gruppera objekten efter typ och räknar antalet av varje typ
             var groupedItems = Person.ProvideAidItems
                 .GroupBy(item => item.KindOfItem)
